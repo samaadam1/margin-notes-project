@@ -146,6 +146,44 @@ Other sizing:
 - **Sticky:** `position: sticky; top: 0; z-index: 20` keeps it at the top while scrolling. The announcement bar above it is not sticky and scrolls away.
 - **Bag label:** visually hidden below 1024px, so mobile shows only the icon (screen readers still read the label).
 
+### Container: centered content column
+Every section (and the footer) puts its content inside `.container`, so everything shares the same left and right edges.
+
+```scss
+width: min(100% - 48px, 1200px);
+margin-inline: auto;
+```
+
+| Screen | Container width | Space on each side |
+|---|---|---|
+| Phone (375px) | 327px | 24px gutter |
+| Tablet (768px) | 720px | 24px gutter |
+| Desktop (1440px) | 1200px (the cap) | 120px, from the auto margins |
+
+- **Edge-to-edge backgrounds:** the `<section>` itself is full width, so its background color fills the screen. Only the content inside is limited to the container.
+- **Vertical spacing:** `.section` adds padding above and below (64px on mobile, 112px on desktop). The hero and footer set their own padding.
+- **Section headings:** `.section-head` is a small flex column (eyebrow, title, lead text), used by arrivals, membership and events.
+- **The header** can't use `.container` directly, because its bar needs its own padding and height, so `.site-header__inner` repeats the same `min(100% - 48px, 1200px)` width on desktop.
+- **Inner layouts:** each section's `__inner` element sits on the container and sets the layout (flex column on mobile, grid on desktop), which the sections below describe.
+
+### Hero: 2 equal columns and an absolute-positioned collage
+- **Grid:** on mobile `.hero__inner` is a single column (text, then collage, 40px apart). From 1024px it becomes `repeat(2, minmax(0, 1fr))` with a 24px gap, so each column is **(1200 − 24) ÷ 2 = 588px**, vertically centered. The text column has 32px of right padding.
+- **Headline:** `clamp(3.5rem, 5.834vw, 5.25rem)` scales it fluidly from about 59px at 1024px up to the designed 84px at 1440px.
+- **Collage:** one box (`.hero__collage`) with a fixed aspect ratio (327 / 360 on mobile, 588 / 600 on desktop). Its three children are `position: absolute` and sized in **percentages of the box**, so they stay locked together at any width:
+
+| Piece | Position | Size (desktop) |
+|---|---|---|
+| Main photo | top right | 78.2% × 90% |
+| Small thumbnail | bottom left, with a thick page-colored border so it looks cut out | 44.2% × 53.3% |
+| "Book of the month" badge | top left (8% down, 10.9% across), a mustard circle rotated −12° | 23.1% wide, square |
+
+The badge text uses `cqw` units, which are a percentage of the collage's width (`container-type: inline-size`), so the text shrinks with the circle.
+
+### New arrivals: heading row and a product grid
+- **Heading row** (`.arrivals__head`): flex with `space-between` and `align-items: flex-end`, so the title is on the left and the "View all books" link on the right, aligned to the bottom.
+- **Product grid** (`.arrivals__list`): 2 equal columns on mobile (16px gap). From **768px** it becomes 4 equal columns with a 24px gap. At the full 1200px container, each card is **(1200 − 3 × 24) ÷ 4 = 282px** wide.
+- Inside a `.book-card`, flexbox stacks the cover, tag, title and author, and the price and add button share a row at the bottom.
+
 ### Book club: 12-column grid (desktop)
 Below 1024px the club is a vertical flex stack (cover, then text). From 1024px up, `.club__inner` becomes a grid:
 
@@ -178,24 +216,6 @@ column:  1   2   3   4   5   6   7   8   9  10  11  12
 - `minmax(0, 1fr)` lets columns shrink below their content width, so long content can't force the grid to overflow.
 
 Inside the content block, the three facts (When / Where / Seats) are a `dl`. On mobile each fact is a row with the label on the left and the value on the right. On desktop they become a 3-column grid with the label above the value.
-
-### Hero: 2 equal columns and an absolute-positioned collage
-- **Grid:** on mobile `.hero__inner` is a single column (text, then collage, 40px apart). From 1024px it becomes `repeat(2, minmax(0, 1fr))` with a 24px gap, so each column is **(1200 − 24) ÷ 2 = 588px**, vertically centered. The text column has 32px of right padding.
-- **Headline:** `clamp(3.5rem, 5.834vw, 5.25rem)` scales it fluidly from about 59px at 1024px up to the designed 84px at 1440px.
-- **Collage:** one box (`.hero__collage`) with a fixed aspect ratio (327 / 360 on mobile, 588 / 600 on desktop). Its three children are `position: absolute` and sized in **percentages of the box**, so they stay locked together at any width:
-
-| Piece | Position | Size (desktop) |
-|---|---|---|
-| Main photo | top right | 78.2% × 90% |
-| Small thumbnail | bottom left, with a thick page-colored border so it looks cut out | 44.2% × 53.3% |
-| "Book of the month" badge | top left (8% down, 10.9% across), a mustard circle rotated −12° | 23.1% wide, square |
-
-The badge text uses `cqw` units, which are a percentage of the collage's width (`container-type: inline-size`), so the text shrinks with the circle.
-
-### New arrivals: heading row and a product grid
-- **Heading row** (`.arrivals__head`): flex with `space-between` and `align-items: flex-end`, so the title is on the left and the "View all books" link on the right, aligned to the bottom.
-- **Product grid** (`.arrivals__list`): 2 equal columns on mobile (16px gap). From **768px** it becomes 4 equal columns with a 24px gap. At the full 1200px container, each card is **(1200 − 3 × 24) ÷ 4 = 282px** wide.
-- Inside a `.book-card`, flexbox stacks the cover, tag, title and author, and the price and add button share a row at the bottom.
 
 ### Membership: stacked cards that become a 3-column grid
 - **Heading** (`.plans__head`): centered text, capped at 620px wide on desktop.
