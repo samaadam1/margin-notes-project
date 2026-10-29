@@ -1,0 +1,77 @@
+// ==========================================================================
+// Design tokens — taken from the "Style guide" board
+// ==========================================================================
+
+// Colors
+$ink: #1c1b19;
+$muted: #5c5a55;
+$forest: #1e4d3a;
+$forest-hover: #163a2c;
+$mustard: #f2b33d;
+$mustard-hover: #e5a225;
+$page: #fbfaf7;
+$surface: #efede6;
+$line: #dcd8cc;
+$white: #ffffff;
+$error: #b3261e;
+
+// On Forest backgrounds
+$on-forest-heading: $white;
+$on-forest-body: #c9d8cf;
+$on-forest-line: rgba(201, 216, 207, 0.3);
+
+// Footer
+$footer-muted: #a9a69f;
+$footer-line: #3a3936;
+
+// Image placeholders
+$cover-sand: #d9cfc0;
+$cover-sage: #bfd0c7;
+$cover-wheat: #e6d3a8;
+$cover-lilac: #c9c6d6;
+$sage-text: #3f4a44;
+
+// Fonts
+$font-serif: "Instrument Serif", Georgia, "Times New Roman", serif;
+$font-sans: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+// Spacing scale (px) — 4 8 12 16 24 32 48 64 96 112
+$spacing: (
+  1: 4px,
+  2: 8px,
+  3: 12px,
+  4: 16px,
+  5: 24px,
+  6: 32px,
+  7: 48px,
+  8: 64px,
+  9: 96px,
+  10: 112px,
+);
+
+// Radii
+$radius-sm: 6px; // book covers, inputs
+$radius-md: 16px; // cards, images
+$radius-pill: 999px; // buttons, tags
+
+// Shadows
+$shadow-hover: 0 18px 40px -18px rgba($ink, 0.35);
+
+// Motion: 200 ms ease on color, background, transform, shadow
+$transition:
+  color 200ms ease,
+  background-color 200ms ease,
+  border-color 200ms ease,
+  transform 200ms ease,
+  box-shadow 200ms ease,
+  gap 200ms ease;
+
+// Layout
+$content-width: 1200px;
+$gutter-mobile: 24px;
+
+// Breakpoints (mobile-first). Design frames: 375 (mobile) / 1440 (desktop)
+$breakpoints: (
+  md: 768px,
+  lg: 1024px,
+);

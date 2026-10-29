@@ -1,0 +1,122 @@
+@use "../abstracts" as *;
+
+.site-footer {
+  padding: 48px 0 32px;
+  background: $ink;
+  color: $white;
+
+  @include up(lg) {
+    padding: 64px 0 40px;
+  }
+
+  &__inner {
+    @include flex-col(sp(6));
+
+    @include up(lg) {
+      gap: sp(7);
+    }
+  }
+
+  &__top {
+    @include flex-col(sp(6));
+
+    @include up(lg) {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: sp(5);
+    }
+  }
+
+  &__brand {
+    @include flex-col(sp(2));
+
+    @include up(lg) {
+      grid-column: span 5;
+      gap: sp(3);
+    }
+
+    p {
+      max-width: 320px;
+      color: $footer-muted;
+      @include type(15, 24);
+    }
+  }
+
+  &__logo {
+    color: $white;
+    text-decoration: none;
+    font-family: $font-serif;
+    @include type(32, 36);
+
+    @include up(lg) {
+      @include type(36, 40);
+    }
+  }
+
+  // Mobile: 2-column grid of link lists. Desktop: lists join the 12-col grid.
+  &__navs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: sp(6) sp(4);
+
+    @include up(lg) {
+      display: contents;
+    }
+  }
+
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+    gap: sp(4);
+    padding-top: sp(5);
+    border-top: 1px solid $footer-line;
+    color: $footer-muted;
+    @include type(14, 20);
+
+    a {
+      color: $footer-muted;
+      transition: $transition;
+
+      &:hover {
+        color: $white;
+      }
+    }
+  }
+}
+
+.footer-nav {
+  @include flex-col(12px);
+
+  @include up(lg) {
+    gap: 14px;
+
+    &:nth-child(1) {
+      grid-column: 7 / span 2;
+    }
+
+    &:nth-child(2),
+    &:nth-child(3) {
+      grid-column: span 2;
+    }
+  }
+
+  &__title {
+    color: $footer-muted;
+    @include t-eyebrow;
+  }
+
+  ul {
+    @include flex-col(10px);
+    @include type(15, 20, 500);
+  }
+
+  a {
+    color: $white;
+    text-decoration: none;
+    transition: $transition;
+
+    &:hover {
+      color: $mustard;
+    }
+  }
+}

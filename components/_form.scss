@@ -1,0 +1,50 @@
+@use "../abstracts" as *;
+
+.field {
+  @include flex-col(sp(2));
+
+  &__label {
+    @include type(14, 20, 600);
+  }
+
+  &__input {
+    width: 100%;
+    min-width: 0;
+    height: 52px;
+    padding: 0 sp(4);
+    border: 1.5px solid transparent;
+    border-radius: $radius-sm;
+    background: $white;
+    color: $ink;
+    font-size: rem(16); // 16px also stops iOS zooming on focus
+    line-height: rem(20);
+    transition: $transition;
+
+    &::placeholder {
+      color: $muted;
+      opacity: 0.8;
+    }
+
+    // Input · focus: Forest border + soft Forest ring
+    &:focus {
+      outline: none;
+      border-color: $forest;
+      box-shadow: 0 0 0 3px rgba($forest, 0.18);
+    }
+
+    // Input · error (browser flags it after the user has interacted)
+    &:user-invalid {
+      border-color: $error;
+      box-shadow: none;
+    }
+  }
+
+  &__error {
+    @include type(14, 20, 600);
+    color: $error;
+
+    &[hidden] {
+      display: none;
+    }
+  }
+}

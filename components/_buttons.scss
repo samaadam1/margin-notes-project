@@ -1,0 +1,146 @@
+@use "../abstracts" as *;
+
+// Pill button — 52px tall, 26px side padding
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 52px;
+  padding: 0 26px;
+  border: 1.5px solid transparent;
+  border-radius: $radius-pill;
+  background: transparent;
+  color: $ink;
+  text-decoration: none;
+  @include t-button;
+  transition: $transition;
+
+  // Primary: Forest → darker Forest on hover
+  &--primary {
+    background: $forest;
+    color: $white;
+
+    &:hover {
+      background: $forest-hover;
+    }
+  }
+
+  // Accent (used on Forest backgrounds): Mustard → darker Mustard
+  &--accent {
+    background: $mustard;
+    color: $ink;
+
+    &:hover {
+      background: $mustard-hover;
+    }
+  }
+
+  // Outline (secondary actions on light backgrounds)
+  &--outline {
+    border-color: $ink;
+
+    &:hover {
+      background: $ink;
+      color: $white;
+    }
+  }
+
+  &--sm {
+    height: 44px;
+    padding: 0 20px;
+  }
+
+  &--block {
+    display: flex;
+    width: 100%;
+  }
+}
+
+// Row of CTA buttons: stacked on mobile, inline on desktop
+.cta-row {
+  display: flex;
+  flex-direction: column;
+  gap: sp(2);
+  padding-top: sp(2);
+
+  .btn {
+    width: 100%;
+  }
+
+  .link {
+    justify-content: center;
+    min-height: 44px;
+  }
+
+  // Tablet and up: buttons sit inline instead of stretching full width
+  @include up(md) {
+    flex-direction: row;
+    align-items: center;
+    gap: 28px;
+
+    .btn {
+      width: auto;
+    }
+
+    .link {
+      justify-content: flex-start;
+      min-height: 0;
+    }
+  }
+}
+
+// Text link with arrow — gap grows + underline on hover
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: $forest;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 4px;
+  @include t-button;
+  transition: $transition;
+
+  &:hover {
+    gap: 10px;
+    text-decoration-color: currentColor;
+  }
+
+  &--light {
+    color: $white;
+  }
+
+  .icon {
+    flex: none;
+  }
+}
+
+// Round 44px icon button (search, menu, add to bag)
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1.5px solid $ink;
+  border-radius: $radius-pill;
+  background: transparent;
+  color: $ink;
+  transition: $transition;
+
+  &:hover {
+    background: $ink;
+    color: $white;
+  }
+
+  &--ghost {
+    border-color: transparent;
+
+    &:hover {
+      background: $surface;
+      color: $ink;
+    }
+  }
+}

@@ -1,0 +1,33 @@
+@use "../abstracts" as *;
+
+// Image placeholder — swap the contents for an <img> when you have photos
+.ph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: $cover-sand;
+  color: $muted;
+  text-align: center;
+  @include type(13, 18, 500);
+
+  &--sand {
+    background: $cover-sand;
+  }
+  &--sage {
+    background: $cover-sage;
+    color: $sage-text;
+  }
+  &--wheat {
+    background: $cover-wheat;
+  }
+  &--lilac {
+    background: $cover-lilac;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}

@@ -1,0 +1,129 @@
+@use "../abstracts" as *;
+
+.club {
+  background: $forest;
+  color: $on-forest-heading;
+
+  &__inner {
+    @include flex-col(sp(6));
+
+    @include up(lg) {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: sp(5);
+      align-items: center;
+    }
+  }
+
+  &__cover {
+    width: 220px;
+    margin-inline: auto;
+    aspect-ratio: 2 / 3;
+    border-radius: $radius-sm;
+
+    @include up(lg) {
+      grid-column: span 4;
+      width: 100%;
+      margin: 0;
+    }
+  }
+
+  &__content {
+    @include flex-col(20px);
+
+    @include up(lg) {
+      grid-column: 6 / span 7;
+      gap: sp(5);
+    }
+  }
+
+  &__intro {
+    @include flex-col(sp(2));
+
+    @include up(lg) {
+      gap: sp(3);
+    }
+
+    .eyebrow {
+      color: $mustard;
+    }
+  }
+
+  &__title {
+    @include t-section-title;
+  }
+
+  &__author {
+    color: $on-forest-body;
+  }
+
+  &__quote {
+    @include flex-col(sp(2));
+
+    @include up(lg) {
+      gap: sp(3);
+    }
+
+    p {
+      font-family: $font-serif;
+      font-style: italic;
+      @include type(24, 30);
+
+      @include up(lg) {
+        @include type(30, 38);
+      }
+    }
+
+    footer {
+      color: $on-forest-body;
+      @include type(14, 20);
+    }
+  }
+
+  // When / Where / Seats
+  &__facts {
+    border-top: 1px solid $on-forest-line;
+
+    // Mobile: label left, value right
+    > div {
+      display: flex;
+      justify-content: space-between;
+      gap: sp(4);
+      padding: sp(3) 0;
+      border-bottom: 1px solid $on-forest-line;
+    }
+
+    dt {
+      color: $on-forest-body;
+      @include t-eyebrow;
+      line-height: rem(20);
+    }
+
+    dd {
+      @include type(15, 20, 600);
+    }
+
+    // Desktop: three columns, label above value
+    @include up(lg) {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: sp(5);
+      padding-top: sp(5);
+
+      > div {
+        display: block;
+        padding: 0;
+        border: 0;
+      }
+
+      dt {
+        line-height: rem(16);
+      }
+
+      dd {
+        margin-top: 6px;
+        @include type(17, 28, 600);
+      }
+    }
+  }
+}

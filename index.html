@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Margin Notes — Independent bookshop &amp; reading club</title>
+  <meta name="description"
+    content="Hand-picked new books, a monthly reading club and a quiet upstairs room to read in. An independent bookshop in Zamalek, Cairo.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Manrope:wght@400;500;600;700&amp;display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="main.css">
+
+  <!-- Icon sprite (symbols.js). Without defer, this script would run in the head, before <body> exists,
+       and fail on document.body. With defer, the browser downloads it in the background while parsing
+       the HTML, then runs it once the document is parsed, so the body is there and the icons get
+       inserted. It also lets us keep the script in the head instead of at the top of the body. -->
+  <script src="symbols.js" defer></script>
+</head>
+
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <p class="announce">Open late every Thursday until 10 PM</p>
+
+  <!-- ============================== Header ============================== -->
+  <header class="site-header">
+    <div class="site-header__inner">
+      <input class="menu-check" type="checkbox" id="menu-check" aria-label="Toggle menu">
+      <a class="logo" href="#">Margin <em>Notes</em></a>
+
+      <nav class="site-nav" id="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="#arrivals">Shop</a></li>
+          <li><a href="#club">Book club</a></li>
+          <li><a href="#events">Events</a></li>
+          <li><a href="#visit">Visit</a></li>
+        </ul>
+      </nav>
+
+      <div class="site-header__actions">
+        <button class="icon-btn icon-btn--ghost" type="button" aria-label="Search books">
+          <svg class="icon icon--20" style="stroke-width:2" aria-hidden="true">
+            <use href="#i-search" />
+          </svg>
+        </button>
+        <a class="bag-link" href="#">
+          <svg class="icon icon--18" style="stroke-width:2" aria-hidden="true">
+            <use href="#i-bag" />
+          </svg>
+          <span class="bag-link__label">Bag (0)</span>
+        </a>
+        <label class="icon-btn menu-toggle" for="menu-check">
+          <span class="sr-only">Menu</span>
+          <svg class="icon icon--18 menu-toggle__open" aria-hidden="true">
+            <use href="#i-menu" />
+          </svg>
+          <svg class="icon icon--18 menu-toggle__close" aria-hidden="true">
+            <use href="#i-close" />
+          </svg>
+        </label>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============================== Hero ============================== -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero__inner">
+        <div class="hero__copy">
+          <p class="eyebrow">Independent bookshop &amp; reading club</p>
+          <h1 class="hero__title" id="hero-title">Read slowly. <em>Talk about it</em> often.</h1>
+          <p class="hero__lead">Hand-picked new books, a monthly reading club and a quiet upstairs room to read in. Come
+            for one book, stay for the conversation.</p>
+          <div class="cta-row">
+            <a class="btn btn--primary" href="#club">Join the book club</a>
+            <a class="link" href="#arrivals">Browse new arrivals
+              <svg class="icon icon--16" aria-hidden="true">
+                <use href="#i-arrow" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero__collage">
+          <!-- Replace each .ph block with an <img> when you have photos -->
+          <figure class="hero__photo ph ph--sand">
+            <figcaption>Shop interior</figcaption>
+          </figure>
+          <figure class="hero__thumb ph ph--sage">
+            <figcaption>Reader</figcaption>
+          </figure>
+          <p class="hero__badge">Book of<br>the month</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================== New arrivals =========================== -->
+    <section class="section arrivals" id="arrivals" aria-labelledby="arrivals-title">
+      <div class="container arrivals__inner">
+        <div class="arrivals__head">
+          <div class="section-head">
+            <p class="eyebrow">Just in</p>
+            <h2 class="section-title" id="arrivals-title">New arrivals</h2>
+          </div>
+          <a class="link" href="#"><span>View all<span class="hide-sm"> books</span></span>
+            <svg class="icon icon--16" aria-hidden="true">
+              <use href="#i-arrow" />
+            </svg>
+          </a>
+        </div>
+
+        <ul class="arrivals__list">
+          <li>
+            <article class="book-card">
+              <div class="book-card__cover ph ph--sand">Cover</div>
+              <div class="book-card__body">
+                <span class="tag">Fiction</span>
+                <h3 class="book-card__title">The Salt Orchard</h3>
+                <p class="book-card__author">Leila Mansour</p>
+                <div class="book-card__foot">
+                  <p class="book-card__price">EGP 420</p>
+                  <button class="icon-btn" type="button" aria-label="Add The Salt Orchard to bag">
+                    <svg class="icon icon--18" aria-hidden="true">
+                      <use href="#i-plus" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="book-card">
+              <div class="book-card__cover ph ph--sage">Cover</div>
+              <div class="book-card__body">
+                <span class="tag">Essays</span>
+                <h3 class="book-card__title">Small Hours</h3>
+                <p class="book-card__author">Tomás Reyes</p>
+                <div class="book-card__foot">
+                  <p class="book-card__price">EGP 360</p>
+                  <button class="icon-btn" type="button" aria-label="Add Small Hours to bag">
+                    <svg class="icon icon--18" aria-hidden="true">
+                      <use href="#i-plus" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="book-card">
+              <div class="book-card__cover ph ph--wheat">Cover</div>
+              <div class="book-card__body">
+                <span class="tag">Fiction</span>
+                <h3 class="book-card__title">A Map of Quiet Rivers</h3>
+                <p class="book-card__author">Hana Ito</p>
+                <div class="book-card__foot">
+                  <p class="book-card__price">EGP 480</p>
+                  <button class="icon-btn" type="button" aria-label="Add A Map of Quiet Rivers to bag">
+                    <svg class="icon icon--18" aria-hidden="true">
+                      <use href="#i-plus" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="book-card">
+              <div class="book-card__cover ph ph--lilac">Cover</div>
+              <div class="book-card__body">
+                <span class="tag">Non-fiction</span>
+                <h3 class="book-card__title">Notes on Making</h3>
+                <p class="book-card__author">Ayo Bello</p>
+                <div class="book-card__foot">
+                  <p class="book-card__price">EGP 390</p>
+                  <button class="icon-btn" type="button" aria-label="Add Notes on Making to bag">
+                    <svg class="icon icon--18" aria-hidden="true">
+                      <use href="#i-plus" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </article>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================ Book club ============================ -->
+    <section class="section club on-forest" id="club" aria-labelledby="club-title">
+      <div class="container club__inner">
+        <figure class="club__cover ph ph--sand">
+          <figcaption>Cover</figcaption>
+        </figure>
+
+        <div class="club__content">
+          <div class="club__intro">
+            <p class="eyebrow">October book club pick</p>
+            <h2 class="club__title" id="club-title">The Salt Orchard</h2>
+            <p class="club__author">by Leila Mansour</p>
+          </div>
+
+          <blockquote class="club__quote">
+            <p>“Every summer the trees gave less fruit and more salt, and every summer we pretended not to notice.”</p>
+            <footer>— Opening line, <cite>The Salt Orchard</cite></footer>
+          </blockquote>
+
+          <dl class="club__facts">
+            <div>
+              <dt>When</dt>
+              <dd><time datetime="2026-10-29T19:00">Thu 29 Oct, 7 PM</time></dd>
+            </div>
+            <div>
+              <dt>Where</dt>
+              <dd>Upstairs room</dd>
+            </div>
+            <div>
+              <dt>Seats</dt>
+              <dd>20 per meeting</dd>
+            </div>
+          </dl>
+
+          <div class="cta-row">
+            <a class="btn btn--accent" href="#">Reserve a seat</a>
+            <a class="link link--light" href="#">Read the first chapter
+              <svg class="icon icon--16" aria-hidden="true">
+                <use href="#i-arrow" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= Membership ============================ -->
+    <section class="section plans" aria-labelledby="plans-title">
+      <div class="container plans__inner">
+        <div class="section-head plans__head">
+          <p class="eyebrow">Membership</p>
+          <h2 class="section-title" id="plans-title">Pick how you read with us.</h2>
+          <p class="lead">Every plan includes the reading room. Cancel any time.</p>
+        </div>
+
+        <ul class="plans__list">
+          <li>
+            <article class="plan">
+              <h3 class="plan__name">Reader</h3>
+              <p class="plan__price"><span class="plan__amount">Free</span></p>
+              <p class="plan__desc">For people who just want to drop by and browse.</p>
+              <ul class="plan__features">
+                <li><svg class="icon icon--20" aria-hidden="true">
+                    <use href="#i-check" />
+                  </svg>Reading room access</li>
+                <li><svg class="icon icon--20" aria-hidden="true">
+                    <use href="#i-check" />
+                  </svg>Monthly email letter</li>
+              </ul>
+              <a class="btn btn--outline btn--block plan__cta" href="#">Sign up free</a>
+            </article>
+          </li>
+          <li class="is-featured">
+            <article class="plan plan--featured">
+              <p class="plan__badge">Most popular</p>
+              <h3 class="plan__name">Club member</h3>
+              <p class="plan__price"><span class="plan__amount">EGP 150</span><span class="plan__period">/ month</span>
+              </p>
+              <p class="plan__desc">Join the monthly club and save on every book.</p>
+              <ul class="plan__features">
+                <li><svg class="icon icon--20" aria-hidden="true">
+                    <use href="#i-check" />
+                  </svg>Everything in Reader</li>
+                <li><svg class="icon icon--20" aria-hidden="true">
+                    <use href="#i-check" />
+                  </svg>A seat at every club meeting</li>
+                <li><svg class="icon icon--20" aria-hidden="true">
+                    <use href="#i-check" />
+                  </svg>10% off all books</li>
+              </ul>
+              <a class="btn btn--primary btn--block plan__cta" href="#">Join the club</a>
+            </article>
+          </li>
+          <li>
+            <article class="plan">
+              <h3 class="plan__name">Patron</h3>
+              <p class="plan__price"><span class="plan__amount">EGP 400</span><span class="plan__period">/ month</span>
+              </p>
+              <p class="plan__desc">For people who want a new book in their hands every month.</p>
+              <ul class="plan__features">
+                <li><svg class="icon icon--20" aria-hidden="true">
+                    <use href="#i-check" />
+                  </svg>Everything in Club member</li>
+                <li><svg class="icon icon--20" aria-hidden="true">
+                    <use href="#i-check" />
+                  </svg>The club book, free, every month</li>
+                <li><svg class="icon icon--20" aria-hidden="true">
+                    <use href="#i-check" />
+                  </svg>Early seats for author talks</li>
+              </ul>
+              <a class="btn btn--outline btn--block plan__cta" href="#">Become a patron</a>
+            </article>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================== Events ============================== -->
+    <section class="section events" id="events" aria-labelledby="events-title">
+      <div class="container events__inner">
+        <div class="events__intro">
+          <p class="eyebrow">Events</p>
+          <h2 class="section-title" id="events-title">Upcoming at the shop</h2>
+          <p class="lead">Every event is free. Seats go fast, so RSVP early.</p>
+        </div>
+
+        <ol class="events__list">
+          <li>
+            <article class="event">
+              <time class="event__date" datetime="2026-10-29"><span class="event__day">29</span><span
+                  class="event__month">Oct</span></time>
+              <div class="event__body">
+                <h3 class="event__title">Book club: The Salt Orchard</h3>
+                <p class="event__meta">Thursday · 7:00 PM · Upstairs room</p>
+              </div>
+              <a class="btn btn--outline btn--sm event__action" href="#">RSVP<span class="sr-only">: Book club, The Salt
+                  Orchard</span></a>
+            </article>
+          </li>
+          <li>
+            <article class="event">
+              <time class="event__date" datetime="2026-11-05"><span class="event__day">05</span><span
+                  class="event__month">Nov</span></time>
+              <div class="event__body">
+                <h3 class="event__title">Poetry night: open mic</h3>
+                <p class="event__meta">Thursday · 8:00 PM · Ground floor</p>
+              </div>
+              <a class="btn btn--outline btn--sm event__action" href="#">RSVP<span class="sr-only">: Poetry night, open
+                  mic</span></a>
+            </article>
+          </li>
+          <li>
+            <article class="event">
+              <time class="event__date" datetime="2026-11-12"><span class="event__day">12</span><span
+                  class="event__month">Nov</span></time>
+              <div class="event__body">
+                <h3 class="event__title">Author talk: Notes on Making</h3>
+                <p class="event__meta">Thursday · 7:30 PM · Upstairs room</p>
+              </div>
+              <a class="btn btn--outline btn--sm event__action" href="#">RSVP<span class="sr-only">: Author talk, Notes
+                  on Making</span></a>
+            </article>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===================== Visit + Newsletter ===================== -->
+    <section class="section visit" id="visit" aria-label="Visit and newsletter">
+      <div class="container visit__inner">
+
+        <div class="panel panel--visit">
+          <h2 class="panel__title">Visit the shop</h2>
+          <address>[Street address]<br>Zamalek, Cairo</address>
+
+          <table class="hours">
+            <caption>Opening hours</caption>
+            <tbody>
+              <tr>
+                <th scope="row"><span class="hide-sm">Saturday</span><span class="show-sm-only">Sat</span> – <span
+                    class="hide-sm">Wednesday</span><span class="show-sm-only">Wed</span></th>
+                <td>10:00 – 21:00</td>
+              </tr>
+              <tr>
+                <th scope="row">Thursday</th>
+                <td>10:00 – 22:00</td>
+              </tr>
+              <tr>
+                <th scope="row">Friday</th>
+                <td>14:00 – 21:00</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <a class="link" href="#">Get directions
+            <svg class="icon icon--16" aria-hidden="true">
+              <use href="#i-arrow" />
+            </svg>
+          </a>
+        </div>
+
+        <div class="panel panel--letter on-forest">
+          <div class="panel__intro">
+            <h2 class="panel__title">The Margin Notes letter</h2>
+            <p>One email a month: new arrivals, the club pick and upcoming events.</p>
+          </div>
+
+          <form class="letter-form field" id="letter-form" action="#">
+            <label class="field__label" for="email">Email address</label>
+            <div class="letter-form__row">
+              <input class="field__input" id="email" name="email" type="email" autocomplete="email"
+                placeholder="you@example.com" required aria-describedby="email-hint">
+              <button class="btn btn--accent" type="submit">Subscribe</button>
+            </div>
+            <p class="letter-form__hint" id="email-hint">No spam. Unsubscribe with one click.</p>
+          </form>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================== Footer ============================== -->
+  <footer class="site-footer on-ink">
+    <div class="container site-footer__inner">
+      <div class="site-footer__top">
+        <div class="site-footer__brand">
+          <a class="site-footer__logo" href="#">Margin <em>Notes</em></a>
+          <p>An independent bookshop and reading club in Zamalek, Cairo.</p>
+        </div>
+
+        <div class="site-footer__navs">
+          <nav class="footer-nav" aria-labelledby="f-shop">
+            <h2 class="footer-nav__title" id="f-shop">Shop</h2>
+            <ul>
+              <li><a href="#arrivals">New arrivals</a></li>
+              <li><a href="#">Gift cards</a></li>
+            </ul>
+          </nav>
+          <nav class="footer-nav" aria-labelledby="f-club">
+            <h2 class="footer-nav__title" id="f-club">Club</h2>
+            <ul>
+              <li><a href="#club">Membership</a></li>
+              <li><a href="#">Past picks</a></li>
+            </ul>
+          </nav>
+          <nav class="footer-nav" aria-labelledby="f-visit">
+            <h2 class="footer-nav__title" id="f-visit">Visit</h2>
+            <ul>
+              <li><a href="#visit">Directions</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+
+      <div class="site-footer__bottom">
+        <p>© 2026 Margin Notes</p>
+        <a href="#">Privacy</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>

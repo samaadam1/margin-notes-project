@@ -1,0 +1,85 @@
+@use "../abstracts" as *;
+
+.book-card {
+  display: flex;
+  flex-direction: column;
+  gap: sp(3);
+  height: 100%;
+  padding: sp(2);
+  border-radius: $radius-md;
+  background: $white;
+  box-shadow: inset 0 0 0 1px $line;
+  transition: $transition;
+
+  @include up(lg) {
+    gap: sp(4);
+    padding: sp(3);
+  }
+
+  // Hover: lifts 4px and gets the soft shadow
+  &:hover,
+  &:focus-within {
+    transform: translateY(-4px);
+    box-shadow:
+      $shadow-hover,
+      inset 0 0 0 1px $line;
+  }
+
+  &__cover {
+    aspect-ratio: 2 / 3;
+    border-radius: $radius-sm;
+    @include type(12, 16);
+
+    @include up(lg) {
+      @include type(13, 18);
+    }
+  }
+
+  &__body {
+    @include flex-col(sp(1));
+    flex: 1;
+    padding: 0 sp(1) sp(1);
+
+    @include up(lg) {
+      gap: 6px;
+    }
+  }
+
+  // Genre tag is only part of the desktop design
+  .tag {
+    display: none;
+
+    @include up(lg) {
+      display: inline-flex;
+    }
+  }
+
+  &__title {
+    @include t-card-title-sm;
+
+    @include up(lg) {
+      margin-top: sp(1);
+    }
+  }
+
+  &__author {
+    color: $muted;
+    @include t-small;
+  }
+
+  &__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: sp(2);
+
+    @include up(lg) {
+      padding-top: sp(3);
+    }
+  }
+
+  &__price {
+    @include t-button;
+  }
+}

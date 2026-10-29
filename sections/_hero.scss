@@ -1,0 +1,131 @@
+@use "../abstracts" as *;
+
+.hero {
+  padding: 48px 0 64px;
+
+  @include up(lg) {
+    padding: sp(9) 0;
+  }
+
+  &__inner {
+    display: grid;
+    gap: 40px;
+
+    @include up(lg) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: sp(5);
+      align-items: center;
+    }
+  }
+
+  &__copy {
+    @include flex-col(sp(4));
+
+    @include up(lg) {
+      gap: sp(5);
+      padding-right: sp(6);
+    }
+  }
+
+  &__title {
+    @include t-display;
+
+    // Scales from ~59px at 1024 to the designed 84px at 1440
+    @include up(lg) {
+      font-size: clamp(3.5rem, 5.834vw, 5.25rem);
+      line-height: 1.048;
+    }
+  }
+
+  &__lead {
+    color: $muted;
+
+    @include up(lg) {
+      max-width: 460px;
+    }
+  }
+
+  // ---- Image collage ----------------------------------------------------
+  // One box that scales as a unit. Every piece is sized and placed in % of the
+  // box (taken from the design frames), so the three images stay locked
+  // together at any width. Mobile frame: 327 x 360 · Desktop frame: 588 x 600.
+  &__collage {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    margin-inline: auto;
+    aspect-ratio: 327 / 360;
+    container-type: inline-size; // lets the badge text scale with the box
+
+    @include up(lg) {
+      max-width: 588px;
+      margin-inline: 0 0;
+      justify-self: end;
+      aspect-ratio: 588 / 600;
+    }
+  }
+
+  &__photo,
+  &__thumb,
+  &__badge {
+    position: absolute;
+  }
+
+  &__photo {
+    top: 0;
+    right: 0;
+    width: 79.5%; // 260 / 327
+    height: 88.9%; // 320 / 360
+    border-radius: $radius-md;
+
+    @include up(lg) {
+      width: 78.2%; // 460 / 588
+      height: 90%; // 540 / 600
+    }
+  }
+
+  &__thumb {
+    left: 0;
+    bottom: 0;
+    width: 45.9%; // 150 / 327
+    height: 52.8%; // 190 / 360
+    border: 6px solid $page;
+    border-radius: 20px;
+    font-size: rem(12);
+
+    @include up(lg) {
+      width: 44.2%; // 260 / 588
+      height: 53.3%; // 320 / 600
+      border-width: 8px;
+      border-radius: 22px;
+      font-size: rem(14);
+    }
+  }
+
+  // "Book of the month" sticker
+  &__badge {
+    top: 5.6%; // 20 / 360
+    left: 2.4%; // 8 / 327
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 29.4%; // 96 / 327
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: $mustard;
+    color: $ink;
+    text-align: center;
+    transform: rotate(-12deg);
+    font-family: $font-serif;
+    font-size: 4.9cqw; // 16px at the 327px frame
+    line-height: 1.12;
+
+    @include up(lg) {
+      top: 8%; // 48 / 600
+      left: 10.9%; // 64 / 588
+      width: 23.1%; // 136 / 588
+      font-size: 3.74cqw; // 22px at the 588px frame
+      line-height: 1.09;
+    }
+  }
+}

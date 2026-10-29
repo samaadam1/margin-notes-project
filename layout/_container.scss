@@ -1,0 +1,23 @@
+@use "../abstracts" as *;
+
+.container {
+  width: min(100% - #{$gutter-mobile * 2}, #{$content-width});
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: sp(8);
+
+  @include up(lg) {
+    padding-block: sp(10);
+  }
+}
+
+// Section header used by Arrivals / Plans / Events
+.section-head {
+  @include flex-col(sp(2));
+
+  @include up(lg) {
+    gap: sp(3);
+  }
+}

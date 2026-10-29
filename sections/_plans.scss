@@ -1,0 +1,141 @@
+@use "../abstracts" as *;
+
+.plans {
+  &__inner {
+    @include flex-col(40px);
+
+    @include up(lg) {
+      gap: 56px;
+    }
+  }
+
+  &__head {
+    text-align: center;
+
+    @include up(lg) {
+      max-width: 620px;
+      margin-inline: auto;
+    }
+  }
+
+  &__list {
+    @include flex-col(sp(5));
+
+    // Stacked cards stay a readable width on tablets
+    @include below(lg) {
+      width: 100%;
+      max-width: 560px;
+      margin-inline: auto;
+    }
+
+    @include up(lg) {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      align-items: stretch;
+    }
+
+    // Mobile order puts the featured plan first
+    > li {
+      display: flex;
+    }
+
+    > .is-featured {
+      order: -1;
+
+      @include up(lg) {
+        order: 0;
+      }
+    }
+  }
+}
+
+.plan {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: sp(4);
+  padding: 28px sp(5) sp(5);
+  border: 1px solid $line;
+  border-radius: $radius-md;
+  background: $white;
+
+  @include up(lg) {
+    gap: 20px;
+    padding: sp(6);
+  }
+
+  &--featured {
+    border: 2px solid $forest;
+  }
+
+  &__badge {
+    position: absolute;
+    top: -14px;
+    left: sp(5);
+    display: inline-flex;
+    align-items: center;
+    height: 28px;
+    padding: 0 sp(3);
+    border-radius: $radius-pill;
+    background: $mustard;
+    @include t-eyebrow;
+
+    @include up(lg) {
+      left: sp(6);
+    }
+  }
+
+  &__name {
+    @include t-card-title-sm;
+  }
+
+  &__price {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0 6px;
+  }
+
+  &__amount {
+    font-family: $font-serif;
+    white-space: nowrap;
+    @include type(44, 44);
+
+    // 44px at 1024 → the designed 56px at 1440, never wraps
+    @include up(lg) {
+      font-size: clamp(2.75rem, 3.89vw, 3.5rem);
+      line-height: 1;
+    }
+  }
+
+  &__period {
+    color: $muted;
+    @include type(14, 20);
+  }
+
+  &__desc {
+    color: $muted;
+  }
+
+  &__features {
+    @include flex-col(sp(3));
+    padding-top: 20px;
+    border-top: 1px solid $line;
+    @include type(15, 22);
+
+    li {
+      display: flex;
+      gap: 10px;
+    }
+
+    .icon {
+      margin-top: 1px;
+      color: $forest;
+    }
+  }
+
+  &__cta {
+    margin-top: auto;
+  }
+}

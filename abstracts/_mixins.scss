@@ -1,0 +1,117 @@
+@use "sass:map";
+@use "variables" as *;
+@use "functions" as *;
+
+// ---- Media queries (mobile-first) -------------------------------------
+@mixin up($bp) {
+  @media (min-width: map.get($breakpoints, $bp)) {
+    @content;
+  }
+}
+
+@mixin below($bp) {
+  @media (max-width: map.get($breakpoints, $bp) - 0.02px) {
+    @content;
+  }
+}
+
+// ---- Helpers -----------------------------------------------------------
+@mixin visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@mixin flex-col($gap: 0) {
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+}
+
+@mixin type($size, $line, $weight: null, $tracking: null) {
+  font-size: rem($size);
+  line-height: rem($line);
+
+  @if $weight {
+    font-weight: $weight;
+  }
+
+  @if $tracking {
+    letter-spacing: $tracking;
+  }
+}
+
+// ---- Type styles (Typography table in the style guide) ----------------
+// Display: Instrument Serif 84/88 desktop · 48/52 mobile
+@mixin t-display {
+  font-family: $font-serif;
+  font-weight: 400;
+  @include type(48, 52, null, -0.5px);
+
+  @include up(lg) {
+    @include type(84, 88, null, -1px);
+  }
+}
+
+// Section title: 52/56 desktop · 36/40 mobile
+@mixin t-section-title {
+  font-family: $font-serif;
+  font-weight: 400;
+  @include type(36, 40);
+
+  @include up(lg) {
+    @include type(52, 56, null, -0.5px);
+  }
+}
+
+// Card title (large): 30/34 desktop · 24/28 mobile
+@mixin t-card-title-lg {
+  font-family: $font-serif;
+  font-weight: 400;
+  @include type(24, 28);
+
+  @include up(lg) {
+    @include type(30, 34);
+  }
+}
+
+// Card title (small): Manrope 600 · 18/24 desktop · 16/22 mobile
+@mixin t-card-title-sm {
+  font-family: $font-sans;
+  @include type(16, 22, 600);
+
+  @include up(lg) {
+    @include type(18, 24);
+  }
+}
+
+// Body: 17/28 desktop · 16/26 mobile
+@mixin t-body {
+  @include type(16, 26, 400);
+
+  @include up(lg) {
+    @include type(17, 28);
+  }
+}
+
+// Small: 14/20 · 500
+@mixin t-small {
+  @include type(14, 20, 500);
+}
+
+// Eyebrow / tag: 12/16 · 700 · uppercase · +1.5px
+@mixin t-eyebrow {
+  @include type(12, 16, 700, 1.5px);
+  text-transform: uppercase;
+}
+
+// Button / price: 15/20 · 700
+@mixin t-button {
+  @include type(15, 20, 700);
+}

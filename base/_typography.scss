@@ -1,0 +1,77 @@
+@use "../abstracts" as *;
+
+body {
+  background: $page;
+  color: $ink;
+  font-family: $font-sans;
+  @include t-body;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+em {
+  font-style: italic;
+}
+
+// Focus ring: 2px Forest, 3px offset (style guide → "Primary · focus")
+:focus-visible {
+  outline: 2px solid $forest;
+  outline-offset: 3px;
+}
+
+// On dark / Forest surfaces the ring switches to Mustard so it stays visible
+.on-forest :focus-visible,
+.on-ink :focus-visible {
+  outline-color: $mustard;
+}
+
+// Shared text styles
+.eyebrow {
+  @include t-eyebrow;
+  color: $muted;
+}
+
+.section-title {
+  @include t-section-title;
+}
+
+.lead {
+  color: $muted;
+}
+
+.skip-link {
+  @include visually-hidden;
+
+  &:focus {
+    position: fixed !important;
+    top: sp(2);
+    left: sp(2);
+    z-index: 100;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: sp(3) sp(4);
+    clip: auto;
+    background: $ink;
+    color: $white;
+    border-radius: $radius-sm;
+  }
+}
+
+.sr-only {
+  @include visually-hidden;
+}
+
+// Hide secondary words on small screens ("View all books" → "View all")
+.hide-sm {
+  @include below(md) {
+    display: none;
+  }
+}
+
+// Counterpart of .hide-sm: only visible on small screens
+.show-sm-only {
+  @include up(md) {
+    display: none;
+  }
+}

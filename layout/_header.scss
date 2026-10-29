@@ -1,0 +1,200 @@
+@use "../abstracts" as *;
+
+.announce {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding-inline: sp(4);
+  background: $ink;
+  color: $white;
+  text-align: center;
+  @include type(13, 16, 500);
+}
+
+.site-header {
+  // Sticks to the top of the window while scrolling (the announcement bar scrolls away)
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: $page;
+  border-bottom: 1px solid $line;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 64px;
+    padding: 0 sp(4) 0 sp(5); // mobile frame: 24px left, 16px right
+
+    @include up(lg) {
+      width: min(100% - #{$gutter-mobile * 2}, #{$content-width});
+      height: 88px;
+      padding: 0;
+      margin-inline: auto;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: sp(1);
+
+    @include up(lg) {
+      gap: sp(3);
+    }
+  }
+}
+
+.logo {
+  color: $ink;
+  text-decoration: none;
+  font-family: $font-serif;
+  @include type(26, 30);
+
+  @include up(lg) {
+    @include type(32, 36);
+  }
+}
+
+// ---- Main navigation -----------------------------------------------------
+.site-nav {
+  // Mobile: dropdown panel under the header
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  padding: sp(3) sp(5) sp(5);
+  background: $page;
+  border-bottom: 1px solid $line;
+  box-shadow: $shadow-hover;
+
+
+  ul {
+    @include flex-col(0);
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    border-bottom: 1px solid $line;
+    color: $ink;
+    text-decoration: none;
+    @include type(17, 24, 500);
+    transition: $transition;
+
+    &:hover {
+      color: $forest;
+    }
+  }
+
+  li:last-child a {
+    border-bottom: 0;
+  }
+
+  //  up is the media query when the size increases you add new content and change
+  // breakpoint is 1024 px in variables
+  @include up(lg) {
+    display: block;
+    position: static;
+    padding: 0;
+    background: none;
+    border: 0;
+    box-shadow: none;
+
+    ul {
+      flex-direction: row;
+      gap: 40px;
+    }
+
+    a {
+      min-height: 0;
+      padding-bottom: 2px;
+      border: 0;
+      @include type(15, 20, 500);
+      background-image: linear-gradient($forest, $forest);
+      background-repeat: no-repeat;
+      background-position: 0 100%;
+      background-size: 0 1.5px;
+      transition:
+        color 200ms ease,
+        background-size 200ms ease;
+
+      &:hover {
+        background-size: 100% 1.5px;
+      }
+    }
+  }
+}
+
+// ---- Bag link ------------------------------------------------------------
+.bag-link {
+  // The element sits in the line like a word, but it is a box, so width, height, and margin all work.
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: sp(2);
+  height: 44px;
+  min-width: 44px;
+  border: 1.5px solid transparent;
+  border-radius: $radius-pill;
+  color: $ink;
+  text-decoration: none;
+  @include t-button;
+  transition: $transition;
+
+  &__label {
+    @include below(lg) {
+      @include visually-hidden;
+    }
+  }
+
+  &:hover {
+    background: $ink;
+    color: $white;
+  }
+
+  @include up(lg) {
+    padding: 0 18px;
+    border-color: $ink;
+  }
+}
+
+// ---- Menu button (mobile only, CSS-only checkbox toggle) ------------------
+.menu-check {
+  @include visually-hidden;
+
+  &:checked~.site-nav {
+    display: block;
+  }
+
+  &:focus-visible~.site-header__actions .menu-toggle {
+    outline: 2px solid $forest;
+    outline-offset: 3px;
+  }
+}
+
+.icon-btn.menu-toggle {
+  cursor: pointer;
+
+  @include up(lg) {
+    display: none;
+  }
+}
+
+.menu-toggle__close {
+  display: none;
+}
+
+.menu-check:checked~.site-header__actions {
+  .menu-toggle__open {
+    display: none;
+  }
+
+  .menu-toggle__close {
+    display: block;
+  }
+}

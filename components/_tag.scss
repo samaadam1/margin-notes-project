@@ -1,0 +1,13 @@
+@use "../abstracts" as *;
+
+.tag {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  height: 26px;
+  padding: 0 10px;
+  border-radius: $radius-pill;
+  background: $surface;
+  color: $ink;
+  @include t-eyebrow;
+}

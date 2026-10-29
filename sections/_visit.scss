@@ -1,0 +1,161 @@
+@use "../abstracts" as *;
+
+.visit {
+  &__inner {
+    @include flex-col(sp(4));
+
+    @include up(lg) {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: sp(5);
+    }
+  }
+}
+
+.panel {
+  @include flex-col(20px);
+  padding: sp(5);
+  border-radius: $radius-md;
+
+  @include up(lg) {
+    gap: sp(5);
+    padding: sp(7);
+  }
+
+  &__title {
+    font-family: $font-serif;
+    font-weight: 400;
+    @include type(32, 36);
+
+    @include up(lg) {
+      @include type(40, 44);
+    }
+  }
+
+  // Visit the shop
+  &--visit {
+    background: $white;
+    border: 1px solid $line;
+
+    address {
+      color: $muted;
+    }
+
+    .link {
+      align-self: flex-start;
+    }
+  }
+
+  // Newsletter
+  &--letter {
+    background: $forest;
+    color: $on-forest-heading;
+
+    @include up(lg) {
+      justify-content: center;
+    }
+  }
+
+  &__intro {
+    @include flex-col(sp(2));
+
+    @include up(lg) {
+      gap: sp(3);
+    }
+
+    p {
+      color: $on-forest-body;
+    }
+  }
+}
+
+// Opening hours
+.hours {
+  width: 100%;
+  @include type(14, 20);
+
+  @include up(lg) {
+    @include type(15, 22);
+  }
+
+  caption {
+    padding-bottom: sp(2);
+    color: $muted;
+    text-align: left;
+    @include t-eyebrow;
+  }
+
+  tr {
+    border-top: 1px solid $line;
+
+    &:last-child {
+      border-bottom: 1px solid $line;
+    }
+  }
+
+  th,
+  td {
+    padding: sp(3) 0;
+  }
+
+  th {
+    padding-right: sp(2);
+    text-align: left;
+    font-weight: 600;
+  }
+
+  td {
+    color: $muted;
+    text-align: right;
+  }
+}
+
+// Newsletter form
+.letter-form {
+  @include flex-col(sp(2));
+
+  &__row {
+    @include flex-col(sp(2));
+
+    @include up(lg) {
+      flex-direction: row;
+      gap: sp(3);
+    }
+
+    .field__input {
+      @include up(lg) {
+        flex: 1;
+      }
+    }
+
+    .btn {
+      width: 100%;
+      margin-top: sp(1);
+
+      @include up(lg) {
+        width: auto;
+        margin-top: 0;
+        padding: 0 sp(5);
+      }
+    }
+  }
+
+  &__hint {
+    margin-top: sp(1);
+    color: $on-forest-body;
+    @include type(14, 20);
+
+    @include up(lg) {
+      margin-top: 0;
+    }
+  }
+
+  // The error colour (#B3261E) is too dark on Forest, so the message sits on a
+  // white chip to keep the required colour AND stay readable.
+  .field__error {
+    align-self: flex-start;
+    padding: 2px sp(2);
+    border-radius: $radius-sm;
+    background: $white;
+  }
+}

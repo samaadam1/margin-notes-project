@@ -1,0 +1,29 @@
+// ==========================================================================
+// Margin Notes — main stylesheet
+// Architecture: 7-1 inspired (abstracts / base / layout / components / sections)
+// ==========================================================================
+
+// Base
+@use "base/reset";
+@use "base/typography";
+
+// Layout
+@use "layout/container";
+@use "layout/header";
+@use "layout/footer";
+
+// Components
+@use "components/icons";
+@use "components/buttons";
+@use "components/placeholder";
+@use "components/tag";
+@use "components/book-card";
+@use "components/form";
+
+// Page sections
+@use "sections/hero";
+@use "sections/arrivals";
+@use "sections/club";
+@use "sections/plans";
+@use "sections/events";
+@use "sections/visit";
