@@ -177,7 +177,68 @@ column:  1   2   3   4   5   6   7   8   9  10  11  12
 - Between 1024px and 1440px the container is narrower than 1200px, so the columns shrink and the widths scale down.
 - `minmax(0, 1fr)` lets columns shrink below their content width, so long content can't force the grid to overflow.
 
-The events section and the footer use the same 12-column pattern with their own spans.
+Inside the content block, the three facts (When / Where / Seats) are a `dl`. On mobile each fact is a row with the label on the left and the value on the right. On desktop they become a 3-column grid with the label above the value.
+
+### Hero: 2 equal columns and an absolute-positioned collage
+- **Grid:** on mobile `.hero__inner` is a single column (text, then collage, 40px apart). From 1024px it becomes `repeat(2, minmax(0, 1fr))` with a 24px gap, so each column is **(1200 − 24) ÷ 2 = 588px**, vertically centered. The text column has 32px of right padding.
+- **Headline:** `clamp(3.5rem, 5.834vw, 5.25rem)` scales it fluidly from about 59px at 1024px up to the designed 84px at 1440px.
+- **Collage:** one box (`.hero__collage`) with a fixed aspect ratio (327 / 360 on mobile, 588 / 600 on desktop). Its three children are `position: absolute` and sized in **percentages of the box**, so they stay locked together at any width:
+
+| Piece | Position | Size (desktop) |
+|---|---|---|
+| Main photo | top right | 78.2% × 90% |
+| Small thumbnail | bottom left, with a thick page-colored border so it looks cut out | 44.2% × 53.3% |
+| "Book of the month" badge | top left (8% down, 10.9% across), a mustard circle rotated −12° | 23.1% wide, square |
+
+The badge text uses `cqw` units, which are a percentage of the collage's width (`container-type: inline-size`), so the text shrinks with the circle.
+
+### New arrivals: heading row and a product grid
+- **Heading row** (`.arrivals__head`): flex with `space-between` and `align-items: flex-end`, so the title is on the left and the "View all books" link on the right, aligned to the bottom.
+- **Product grid** (`.arrivals__list`): 2 equal columns on mobile (16px gap). From **768px** it becomes 4 equal columns with a 24px gap. At the full 1200px container, each card is **(1200 − 3 × 24) ÷ 4 = 282px** wide.
+- Inside a `.book-card`, flexbox stacks the cover, tag, title and author, and the price and add button share a row at the bottom.
+
+### Membership: stacked cards that become a 3-column grid
+- **Heading** (`.plans__head`): centered text, capped at 620px wide on desktop.
+- **Plan list** (`.plans__list`):
+  - *Mobile:* a flex column (24px gap), with each card capped at 560px and centered so it stays readable on tablets.
+  - *Desktop (≥ 1024px):* `repeat(3, minmax(0, 1fr))`, so each card is **(1200 − 2 × 24) ÷ 3 = 384px**, and `align-items: stretch` makes all three the same height.
+- **Featured plan order:** the "Club member" card has `order: -1` on mobile, so it appears **first** in the stack. At desktop width the order is reset and it sits in the **middle**.
+- **Inside a card:** `.plan` is a flex column. The feature list is separated by a top border, and the button has `margin-top: auto`, which pushes it to the bottom so the three buttons line up even when the descriptions differ in length.
+- **Badge:** "Most popular" is absolutely positioned 14px above the card's top edge, so it overlaps the border.
+
+### Events: the same 12-column split as the club
+- **Section grid** (desktop only): a 12-column grid with 24px gaps, where each column is 78px. The intro takes `span 4` (columns 1–4, 384px) and the list takes `6 / span 7` (columns 6–12, 690px). Column 5 is left empty, exactly like the club. On mobile it is a flex column.
+- **Each event row** (`.event`) is its own small grid using named areas:
+
+| | Columns | Areas |
+|---|---|---|
+| Mobile | `56px` and `1fr` | `"date body"` / `"date action"` (the date spans both rows, and the RSVP button sits under the text) |
+| Desktop | `96px`, `1fr` and `auto` | `"date body action"` (a single row: date, text, button) |
+
+The `auto` column is as wide as the RSVP button needs, and `1fr` takes the rest.
+
+### Visit + newsletter: two equal panels
+- **Grid:** stacked on mobile (16px gap). From 1024px it is `repeat(2, minmax(0, 1fr))` with a 24px gap, so each panel is **588px** wide.
+- **Panels:** `.panel` is a flex column with padding (24px mobile, 48px desktop). The visit panel is white with a border, and the newsletter panel is forest green, vertically centered on desktop.
+- **Opening hours** (`.hours`): a real `<table>`. Day names are left-aligned and bold, times are right-aligned, and each row has a top border.
+- **Newsletter form** (`.letter-form__row`): the email input and Subscribe button stack on mobile, with the button full width. On desktop they sit side by side in a row, with the input taking the remaining width (`flex: 1`).
+
+### Footer: a 12-column grid that includes the link lists
+- **Layout:** the footer is dark, with its content in `.container`, in two rows: `__top` and `__bottom`.
+- **Top row, desktop:** a 12-column grid (78px columns, 24px gaps).
+
+```
+column:  1   2   3   4   5   6   7   8   9  10  11  12
+        ┌───────────────────┐       ┌───────┐┌───────┐┌───────┐
+        │  brand (span 5)   │ empty │ Shop  ││ Club  ││ Visit │
+        └───────────────────┘       │ 7–8   ││ 9–10  ││ 11–12 │
+                                    └───────┘└───────┘└───────┘
+```
+
+  The brand takes `span 5` (486px). The first link list starts at column 7 with `span 2`, and the other two are `span 2` and fall into the next free columns. Each link list is 180px wide.
+- **How the lists join the grid:** the three lists are wrapped in `.site-footer__navs`. On desktop that wrapper is `display: contents`, which makes the wrapper disappear from the layout so its children become direct grid items of the 12-column grid.
+- **Mobile:** the brand stacks on top, and `__navs` is its own 2-column grid, so the three lists wrap into two columns.
+- **Bottom row:** a flex row with `space-between`, putting the copyright on the left and the Privacy link on the right, under a top border.
 
 ## Icons
 
