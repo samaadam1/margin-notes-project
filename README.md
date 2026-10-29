@@ -2,6 +2,8 @@
 
 A static landing page for **Margin Notes**, an independent bookshop and reading club in Zamalek, Cairo. It is plain HTML plus a Sass-compiled stylesheet, with no framework and no build step beyond Sass.
 
+**Live page:** https://samaadam1.github.io/margin-notes-project/
+
 ## Project structure
 
 ```
