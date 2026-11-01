@@ -1,122 +1,122 @@
 @use "../abstracts" as *;
 
 .site-footer {
-  padding: 48px 0 32px;
-  background: $ink;
-  color: $white;
+  padding: $space-48 0 $space-32;
+  background: $color-ink;
+  color: $color-white;
 
-  @include up(lg) {
-    padding: 64px 0 40px;
+  @include desktop-up {
+    padding: $space-64 0 40px;
   }
 
+  // A grid with named areas.
+  // Mobile: everything in one column. Desktop: brand | lists on row 1, bottom bar on row 2
   &__inner {
-    @include flex-col(sp(6));
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "brand"
+      "lists"
+      "bottom";
+    gap: $space-32;
 
-    @include up(lg) {
-      gap: sp(7);
+    @include desktop-up {
+      grid-template-columns: 1fr auto;
+      grid-template-areas:
+        "brand lists"
+        "bottom bottom";
+      gap: $space-48 $space-24;
     }
   }
 
-  &__top {
-    @include flex-col(sp(6));
-
-    @include up(lg) {
-      display: grid;
-      grid-template-columns: repeat(12, minmax(0, 1fr));
-      gap: sp(5);
-    }
-  }
-
+  // ---- Row 1, left: logo and description ---------------------------------
   &__brand {
-    @include flex-col(sp(2));
+    grid-area: brand;
+    @include stack($space-8);
 
-    @include up(lg) {
-      grid-column: span 5;
-      gap: sp(3);
+    @include desktop-up {
+      gap: $space-12;
     }
 
     p {
       max-width: 320px;
-      color: $footer-muted;
-      @include type(15, 24);
+      color: $color-footer-muted;
+      @include text-style(15px, 24px);
     }
   }
 
   &__logo {
-    color: $white;
+    color: $color-white;
     text-decoration: none;
     font-family: $font-serif;
-    @include type(32, 36);
+    @include text-style(32px, 36px);
 
-    @include up(lg) {
-      @include type(36, 40);
+    @include desktop-up {
+      @include text-style(36px, 40px);
     }
   }
 
-  // Mobile: 2-column grid of link lists. Desktop: lists join the 12-col grid.
-  &__navs {
+  // ---- Row 1, right: Shop / Club / Visit lists ---------------------------
+  // Mobile: 2 columns. Desktop: one row of three
+  &__lists {
+    grid-area: lists;
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: sp(6) sp(4);
+    grid-template-columns: 1fr 1fr;
+    gap: $space-32 $space-16;
 
-    @include up(lg) {
-      display: contents;
+    @include desktop-up {
+      display: flex;
+      gap: $space-24;
     }
   }
 
+  // ---- Row 2: copyright left, privacy right ------------------------------
   &__bottom {
+    grid-area: bottom;
     display: flex;
     justify-content: space-between;
-    gap: sp(4);
-    padding-top: sp(5);
-    border-top: 1px solid $footer-line;
-    color: $footer-muted;
-    @include type(14, 20);
+    padding-top: $space-24;
+    border-top: 1px solid $color-footer-line;
+    color: $color-footer-muted;
+    @include text-style(14px, 20px);
+  }
 
-    a {
-      color: $footer-muted;
-      transition: $transition;
+  &__privacy {
+    color: $color-footer-muted;
+    transition: color 200ms ease;
 
-      &:hover {
-        color: $white;
-      }
+    &:hover {
+      color: $color-white;
     }
   }
 }
 
+// One list: small title with links under it
 .footer-nav {
-  @include flex-col(12px);
+  @include stack($space-12);
 
-  @include up(lg) {
+  @include desktop-up {
+    width: 180px;
     gap: 14px;
-
-    &:nth-child(1) {
-      grid-column: 7 / span 2;
-    }
-
-    &:nth-child(2),
-    &:nth-child(3) {
-      grid-column: span 2;
-    }
   }
 
   &__title {
-    color: $footer-muted;
-    @include t-eyebrow;
+    color: $color-footer-muted;
+    @include text-small-heading;
   }
 
-  ul {
-    @include flex-col(10px);
-    @include type(15, 20, 500);
+  &__list {
+    @include stack(10px);
+    @include text-style(15px, 20px, 500);
   }
 
-  a {
-    color: $white;
+  &__link {
+    color: $color-white;
     text-decoration: none;
-    transition: $transition;
+    transition: color 200ms ease;
 
     &:hover {
-      color: $mustard;
+      color: $color-mustard;
     }
   }
 }

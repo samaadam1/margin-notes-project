@@ -1,200 +1,175 @@
 @use "../abstracts" as *;
 
+// Thin dark bar above the header. It scrolls away.
 .announce {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 40px;
-  padding-inline: sp(4);
-  background: $ink;
-  color: $white;
+  padding: 0 $space-16;
+  background: $color-ink;
+  color: $color-white;
   text-align: center;
-  @include type(13, 16, 500);
+  @include text-style(13px, 16px, 500);
 }
 
+// Sticks to the top of the window while you scroll
 .site-header {
-  // Sticks to the top of the window while scrolling (the announcement bar scrolls away)
   position: sticky;
   top: 0;
   z-index: 20;
-  background: $page;
-  border-bottom: 1px solid $line;
+  background: $color-page;
+  border-bottom: 1px solid $color-line;
 
+  // One flex row: logo left, nav middle, actions right
   &__inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
-    height: 64px;
-    padding: 0 sp(4) 0 sp(5); // mobile frame: 24px left, 16px right
+    height: $header-height-mobile;
 
-    @include up(lg) {
-      width: min(100% - #{$gutter-mobile * 2}, #{$content-width});
-      height: 88px;
-      padding: 0;
-      margin-inline: auto;
+    @include desktop-up {
+      height: $header-height-desktop;
     }
   }
 
-  &__actions {
-    display: flex;
-    align-items: center;
-    gap: sp(1);
-
-    @include up(lg) {
-      gap: sp(3);
-    }
-  }
-}
-
-.logo {
-  color: $ink;
-  text-decoration: none;
-  font-family: $font-serif;
-  @include type(26, 30);
-
-  @include up(lg) {
-    @include type(32, 36);
-  }
-}
-
-// ---- Main navigation -----------------------------------------------------
-.site-nav {
-  // Mobile: dropdown panel under the header
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  padding: sp(3) sp(5) sp(5);
-  background: $page;
-  border-bottom: 1px solid $line;
-  box-shadow: $shadow-hover;
-
-
-  ul {
-    @include flex-col(0);
-  }
-
-  a {
-    display: flex;
-    align-items: center;
-    min-height: 48px;
-    border-bottom: 1px solid $line;
-    color: $ink;
+  &__logo {
+    color: $color-ink;
     text-decoration: none;
-    @include type(17, 24, 500);
-    transition: $transition;
+    font-family: $font-serif;
+    @include text-style(26px, 30px);
 
-    &:hover {
-      color: $forest;
+    @include desktop-up {
+      @include text-style(32px, 36px);
     }
   }
 
-  li:last-child a {
-    border-bottom: 0;
+  // Hidden checkbox. Clicking the burger (its label) ticks it and opens the nav
+  &__toggle {
+    @include visually-hidden;
   }
 
-  //  up is the media query when the size increases you add new content and change
-  // breakpoint is 1024 px in variables
-  @include up(lg) {
-    display: block;
-    position: static;
-    padding: 0;
-    background: none;
-    border: 0;
-    box-shadow: none;
+  // Mobile: a dropdown panel under the header, closed until the checkbox is ticked
+  &__nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: $space-8 $gutter $space-24;
+    background: $color-page;
+    border-bottom: 1px solid $color-line;
+    box-shadow: $shadow-hover;
 
-    ul {
+    // Desktop: always visible, sits in the row between logo and actions
+    @include desktop-up {
+      display: block;
+      position: static;
+      padding: 0;
+      border: 0;
+      box-shadow: none;
+    }
+  }
+
+  &__toggle:checked ~ &__nav {
+    display: block;
+  }
+
+  // Mobile: links stacked. Desktop: links in a row
+  &__list {
+    @include stack(0);
+
+    @include desktop-up {
       flex-direction: row;
       gap: 40px;
     }
+  }
 
-    a {
+  &__link {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    border-bottom: 1px solid $color-line;
+    color: $color-ink;
+    text-decoration: none;
+    @include text-style(17px, 24px, 500);
+    transition: color 200ms ease;
+
+    &:hover {
+      color: $color-forest;
+    }
+
+    @include desktop-up {
       min-height: 0;
-      padding-bottom: 2px;
       border: 0;
-      @include type(15, 20, 500);
-      background-image: linear-gradient($forest, $forest);
-      background-repeat: no-repeat;
-      background-position: 0 100%;
-      background-size: 0 1.5px;
-      transition:
-        color 200ms ease,
-        background-size 200ms ease;
-
-      &:hover {
-        background-size: 100% 1.5px;
-      }
-    }
-  }
-}
-
-// ---- Bag link ------------------------------------------------------------
-.bag-link {
-  // The element sits in the line like a word, but it is a box, so width, height, and margin all work.
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: sp(2);
-  height: 44px;
-  min-width: 44px;
-  border: 1.5px solid transparent;
-  border-radius: $radius-pill;
-  color: $ink;
-  text-decoration: none;
-  @include t-button;
-  transition: $transition;
-
-  &__label {
-    @include below(lg) {
-      @include visually-hidden;
+      @include text-style(15px, 20px, 500);
     }
   }
 
-  &:hover {
-    background: $ink;
-    color: $white;
+  // Search, bag and burger button, side by side
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: $space-4;
+
+    @include desktop-up {
+      gap: $space-12;
+    }
   }
 
-  @include up(lg) {
-    padding: 0 18px;
-    border-color: $ink;
+  // Mobile: round icon only. Desktop: pill with the text "Bag (0)"
+  &__bag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: $space-8;
+    height: 44px;
+    min-width: 44px;
+    border: 1.5px solid transparent;
+    border-radius: $radius-pill;
+    color: $color-ink;
+    text-decoration: none;
+    @include text-button;
+    transition: background-color 200ms ease, color 200ms ease;
+
+    &:hover {
+      background: $color-ink;
+      color: $color-white;
+    }
+
+    @include desktop-up {
+      padding: 0 18px;
+      border-color: $color-ink;
+    }
   }
-}
 
-// ---- Menu button (mobile only, CSS-only checkbox toggle) ------------------
-.menu-check {
-  @include visually-hidden;
+  // The burger button exists on mobile only.
+  // Written as ".actions .burger" (more specific) so it beats .icon-btn's display: flex
+  &__burger {
+    cursor: pointer;
+  }
 
-  &:checked~.site-nav {
+  &__actions &__burger {
+    @include desktop-up {
+      display: none;
+    }
+  }
+
+  // Burger shows 3 lines; when the menu is open it shows an X instead
+  &__close-icon {
+    display: none;
+  }
+
+  &__toggle:checked ~ &__actions &__open-icon {
+    display: none;
+  }
+
+  &__toggle:checked ~ &__actions &__close-icon {
     display: block;
   }
 
-  &:focus-visible~.site-header__actions .menu-toggle {
-    outline: 2px solid $forest;
-    outline-offset: 3px;
-  }
-}
-
-.icon-btn.menu-toggle {
-  cursor: pointer;
-
-  @include up(lg) {
-    display: none;
-  }
-}
-
-.menu-toggle__close {
-  display: none;
-}
-
-.menu-check:checked~.site-header__actions {
-  .menu-toggle__open {
-    display: none;
-  }
-
-  .menu-toggle__close {
-    display: block;
+  // Focus ring on the burger when the hidden checkbox is reached with Tab
+  &__toggle:focus-visible ~ &__actions &__burger {
+    @include focus-ring;
   }
 }

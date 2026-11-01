@@ -1,0 +1,60 @@
+@use "../abstracts" as *;
+
+.new-arrivals {
+  background: $color-white;
+
+  &__inner {
+    @include stack($space-32);
+
+    @include desktop-up {
+      gap: $space-48;
+    }
+  }
+
+  // Div 1: titles on the left, "View all" link on the right
+  &__head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: $space-16;
+
+    .link {
+      padding-bottom: 6px;
+
+      @include desktop-up {
+        padding-bottom: 0;
+      }
+    }
+  }
+
+  &__titles {
+    @include stack($space-8);
+
+    @include desktop-up {
+      gap: $space-12;
+    }
+  }
+
+  // Div 2: a flex row that wraps onto new lines
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-16;
+
+    @include tablet-up {
+      gap: $space-24;
+    }
+  }
+
+  // Each book is a share of the line, minus its share of the gaps:
+  // 2 per line with a 16px gap: 50% - 8px
+  // 4 per line with a 24px gap: 25% - 18px (3 gaps x 24px / 4 books)
+  &__item {
+    display: flex;
+    width: calc(50% - 8px);
+
+    @include tablet-up {
+      width: calc(25% - 18px);
+    }
+  }
+}

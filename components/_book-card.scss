@@ -1,85 +1,57 @@
 @use "../abstracts" as *;
 
+// A card has 3 children, stacked: cover, info (tag, name, author), buy (price + button)
 .book-card {
-  display: flex;
-  flex-direction: column;
-  gap: sp(3);
-  height: 100%;
-  padding: sp(2);
+  flex: 1;
+  @include stack($space-12);
+  padding: $space-8;
   border-radius: $radius-md;
-  background: $white;
-  box-shadow: inset 0 0 0 1px $line;
-  transition: $transition;
+  background: $color-white;
+  box-shadow: inset 0 0 0 1px $color-line;
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease;
 
-  @include up(lg) {
-    gap: sp(4);
-    padding: sp(3);
+  @include desktop-up {
+    gap: $space-16;
+    padding: $space-12;
   }
 
-  // Hover: lifts 4px and gets the soft shadow
-  &:hover,
-  &:focus-within {
+  // On hover the card lifts 4px and gets a soft shadow
+  &:hover {
     transform: translateY(-4px);
-    box-shadow:
-      $shadow-hover,
-      inset 0 0 0 1px $line;
+    box-shadow: $shadow-hover;
   }
 
-  &__cover {
-    aspect-ratio: 2 / 3;
-    border-radius: $radius-sm;
-    @include type(12, 16);
+  &__info {
+    @include stack($space-4);
+    padding: 0 $space-4;
 
-    @include up(lg) {
-      @include type(13, 18);
-    }
-  }
-
-  &__body {
-    @include flex-col(sp(1));
-    flex: 1;
-    padding: 0 sp(1) sp(1);
-
-    @include up(lg) {
+    @include desktop-up {
       gap: 6px;
     }
   }
 
-  // Genre tag is only part of the desktop design
-  .tag {
-    display: none;
-
-    @include up(lg) {
-      display: inline-flex;
-    }
-  }
-
   &__title {
-    @include t-card-title-sm;
-
-    @include up(lg) {
-      margin-top: sp(1);
-    }
+    @include text-card-title-small;
   }
 
   &__author {
-    color: $muted;
-    @include t-small;
+    color: $color-muted;
+    @include text-small;
   }
 
-  &__foot {
+  // Price on the left, "+" button on the right.
+  // margin-top: auto pushes it to the bottom, so all the prices line up
+  &__buy {
+    margin-top: auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: auto;
-    padding-top: sp(2);
-
-    @include up(lg) {
-      padding-top: sp(3);
-    }
+    padding: 0 $space-4 $space-4;
   }
 
   &__price {
-    @include t-button;
+    @include text-button;
   }
 }

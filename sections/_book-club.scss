@@ -1,0 +1,154 @@
+@use "../abstracts" as *;
+
+.book-club {
+  background: $color-forest;
+  color: $color-white;
+
+  // Mobile: cover, then text. Desktop: a flex row, cover left and text right
+  &__inner {
+    @include stack($space-32);
+
+    @include desktop-up {
+      flex-direction: row;
+      align-items: center;
+      gap: $space-96;
+    }
+  }
+
+  &__cover {
+    width: 220px;
+    margin: 0 auto;
+
+    @include desktop-up {
+      width: 384px;
+      flex: none;
+      margin: 0;
+    }
+  }
+
+  // The text side: a stack of 4 rows (intro, quote, facts, buttons)
+  &__content {
+    @include stack(20px);
+
+    @include desktop-up {
+      flex: 1;
+      gap: $space-24;
+    }
+  }
+
+  // Row 1
+  &__intro {
+    @include stack($space-8);
+
+    @include desktop-up {
+      gap: $space-12;
+    }
+
+    .small-heading {
+      color: $color-mustard;
+    }
+  }
+
+  &__title {
+    @include text-section-title;
+  }
+
+  &__author {
+    color: $color-on-forest;
+  }
+
+  // Row 2
+  &__quote {
+    @include stack($space-8);
+
+    @include desktop-up {
+      gap: $space-12;
+    }
+
+    p {
+      font-family: $font-serif;
+      font-style: italic;
+      @include text-style(24px, 30px);
+
+      @include desktop-up {
+        @include text-style(30px, 38px);
+      }
+    }
+
+    footer {
+      color: $color-on-forest;
+      @include text-style(14px, 20px);
+    }
+  }
+
+  // Row 3: When / Where / Seats.
+  // Mobile: each fact is a flex row (label left, value right), lines between them.
+  // Desktop: the three facts sit side by side, label above value.
+  &__facts {
+    @include stack(0);
+    border-top: 1px solid $color-on-forest-line;
+
+    @include desktop-up {
+      flex-direction: row;
+      gap: $space-24;
+      padding-top: $space-24;
+    }
+  }
+
+  &__fact {
+    display: flex;
+    justify-content: space-between;
+    gap: $space-16;
+    padding: $space-12 0;
+    border-bottom: 1px solid $color-on-forest-line;
+
+    @include desktop-up {
+      flex: 1;
+      display: block;
+      padding: 0;
+      border: 0;
+    }
+
+    dt {
+      color: $color-on-forest;
+      @include text-small-heading;
+      line-height: 20px;
+
+      @include desktop-up {
+        line-height: 16px;
+      }
+    }
+
+    dd {
+      @include text-style(15px, 20px, 600);
+
+      @include desktop-up {
+        margin-top: 6px;
+        @include text-style(17px, 28px, 600);
+      }
+    }
+  }
+
+  // Row 4: buttons. Stacked on mobile, side by side on desktop
+  &__buttons {
+    @include stack($space-8);
+    padding-top: $space-4;
+
+    @include desktop-up {
+      flex-direction: row;
+      align-items: center;
+      gap: 28px;
+      padding-top: $space-8;
+    }
+
+    .link {
+      justify-content: center;
+      min-height: 44px;
+
+      @include desktop-up {
+        justify-content: flex-start;
+        min-height: 0;
+      }
+    }
+  }
+}

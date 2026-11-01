@@ -1,13 +1,18 @@
 @use "../abstracts" as *;
 
+// Small category label ("Fiction"). The design shows it on desktop only.
 .tag {
+  display: none;
   align-self: flex-start;
-  display: inline-flex;
   align-items: center;
   height: 26px;
   padding: 0 10px;
   border-radius: $radius-pill;
-  background: $surface;
-  color: $ink;
-  @include t-eyebrow;
+  background: $color-surface;
+  color: $color-ink;
+  @include text-small-heading;
+
+  @include desktop-up {
+    display: inline-flex;
+  }
 }

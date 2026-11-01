@@ -1,50 +1,45 @@
 @use "../abstracts" as *;
 
+// Input + error message. No JavaScript: the browser decides when the input is invalid.
 .field {
-  @include flex-col(sp(2));
-
-  &__label {
-    @include type(14, 20, 600);
-  }
+  @include stack($space-8);
 
   &__input {
     width: 100%;
-    min-width: 0;
     height: 52px;
-    padding: 0 sp(4);
+    padding: 0 $space-16;
     border: 1.5px solid transparent;
     border-radius: $radius-sm;
-    background: $white;
-    color: $ink;
-    font-size: rem(16); // 16px also stops iOS zooming on focus
-    line-height: rem(20);
-    transition: $transition;
+    background: $color-white;
+    color: $color-ink;
+    transition:
+      border-color 200ms ease,
+      box-shadow 200ms ease;
 
-    &::placeholder {
-      color: $muted;
-      opacity: 0.8;
-    }
-
-    // Input · focus: Forest border + soft Forest ring
+    // Clicked into
     &:focus {
-      outline: none;
-      border-color: $forest;
-      box-shadow: 0 0 0 3px rgba($forest, 0.18);
+      border-color: $color-forest;
+      box-shadow: 0 0 0 3px rgba($color-forest, 0.18);
     }
 
-    // Input · error (browser flags it after the user has interacted)
+    // Wrong email, after the person has typed something
     &:user-invalid {
-      border-color: $error;
-      box-shadow: none;
+      border-color: $color-error;
     }
   }
 
+  // Hidden until the input above it is invalid. White chip so red stays readable on green.
   &__error {
-    @include type(14, 20, 600);
-    color: $error;
+    display: none;
+    align-self: flex-start;
+    padding: 2px $space-8;
+    border-radius: $radius-sm;
+    background: $color-white;
+    color: $color-error;
+    @include text-style(14px, 20px);
+  }
 
-    &[hidden] {
-      display: none;
-    }
+  &__input:user-invalid ~ &__error {
+    display: block;
   }
 }

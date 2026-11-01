@@ -1,77 +1,64 @@
 // ==========================================================================
-// Design tokens — taken from the "Style guide" board
+// Design tokens (from the style guide)
 // ==========================================================================
 
 // Colors
-$ink: #1c1b19;
-$muted: #5c5a55;
-$forest: #1e4d3a;
-$forest-hover: #163a2c;
-$mustard: #f2b33d;
-$mustard-hover: #e5a225;
-$page: #fbfaf7;
-$surface: #efede6;
-$line: #dcd8cc;
-$white: #ffffff;
-$error: #b3261e;
+$color-ink: #1c1b19;
+$color-muted: #5c5a55;
+$color-forest: #1e4d3a;
+$color-forest-hover: #163a2c;
+$color-mustard: #f2b33d;
+$color-mustard-hover: #e5a225;
+$color-page: #fbfaf7;
+$color-surface: #efede6;
+$color-line: #dcd8cc;
+$color-white: #ffffff;
+$color-error: #b3261e;
 
-// On Forest backgrounds
-$on-forest-heading: $white;
-$on-forest-body: #c9d8cf;
-$on-forest-line: rgba(201, 216, 207, 0.3);
+// Text on green (forest) backgrounds
+$color-on-forest: #c9d8cf;
+$color-on-forest-line: rgba(201, 216, 207, 0.3);
 
 // Footer
-$footer-muted: #a9a69f;
-$footer-line: #3a3936;
+$color-footer-muted: #a9a69f;
+$color-footer-line: #3a3936;
 
 // Image placeholders
-$cover-sand: #d9cfc0;
-$cover-sage: #bfd0c7;
-$cover-wheat: #e6d3a8;
-$cover-lilac: #c9c6d6;
-$sage-text: #3f4a44;
+$placeholder-sand: #d9cfc0;
+$placeholder-sage: #bfd0c7;
+$placeholder-wheat: #e6d3a8;
+$placeholder-lilac: #c9c6d6;
 
 // Fonts
-$font-serif: "Instrument Serif", Georgia, "Times New Roman", serif;
-$font-sans: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+$font-serif: "Instrument Serif", Georgia, serif;
+$font-sans: "Manrope", system-ui, sans-serif;
 
-// Spacing scale (px) — 4 8 12 16 24 32 48 64 96 112
-$spacing: (
-  1: 4px,
-  2: 8px,
-  3: 12px,
-  4: 16px,
-  5: 24px,
-  6: 32px,
-  7: 48px,
-  8: 64px,
-  9: 96px,
-  10: 112px,
-);
+// Spacing
+$space-4: 4px;
+$space-8: 8px;
+$space-12: 12px;
+$space-16: 16px;
+$space-24: 24px;
+$space-32: 32px;
+$space-48: 48px;
+$space-64: 64px;
+$space-96: 96px;
+$space-112: 112px;
 
 // Radii
 $radius-sm: 6px; // book covers, inputs
 $radius-md: 16px; // cards, images
 $radius-pill: 999px; // buttons, tags
 
-// Shadows
-$shadow-hover: 0 18px 40px -18px rgba($ink, 0.35);
-
-// Motion: 200 ms ease on color, background, transform, shadow
-$transition:
-  color 200ms ease,
-  background-color 200ms ease,
-  border-color 200ms ease,
-  transform 200ms ease,
-  box-shadow 200ms ease,
-  gap 200ms ease;
+// Shadow (cards on hover)
+$shadow-hover: 0 18px 40px -18px rgba(28, 27, 25, 0.35);
 
 // Layout
 $content-width: 1200px;
-$gutter-mobile: 24px;
+$gutter: 24px;
+$header-height-mobile: 64px;
+$header-height-desktop: 88px;
 
-// Breakpoints (mobile-first). Design frames: 375 (mobile) / 1440 (desktop)
-$breakpoints: (
-  md: 768px,
-  lg: 1024px,
-);
+// Breakpoints (mobile-first: styles start small, these add rules for bigger screens)
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1024px;

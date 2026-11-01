@@ -1,57 +1,42 @@
 @use "../abstracts" as *;
 
-*,
-*::before,
-*::after {
+* {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
-  -webkit-text-size-adjust: 100%;
+  // Clicking a link like #club glides to the section
   scroll-behavior: smooth;
-  scroll-padding-top: 64px; // keeps anchor targets clear of the sticky header
+  // Leave room for the sticky header so it does not cover the section title
+  scroll-padding-top: $header-height-mobile;
 
-  @media (min-width: 1024px) {
-    scroll-padding-top: 88px;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    scroll-behavior: auto;
+  @include desktop-up {
+    scroll-padding-top: $header-height-desktop;
   }
 }
 
-body,
-h1,
-h2,
-h3,
-p,
-figure,
-blockquote,
-dl,
-dd,
-ul,
-ol {
-  margin: 0;
+body {
+  background: $color-page;
+  color: $color-ink;
+  font-family: $font-sans;
+  @include text-body;
 }
 
 ul,
 ol {
-  padding: 0;
   list-style: none;
+}
+
+a {
+  color: inherit;
 }
 
 img,
 svg {
   display: block;
   max-width: 100%;
-}
-
-img {
-  height: auto;
-}
-
-a {
-  color: inherit;
 }
 
 button,
@@ -72,11 +57,12 @@ address {
   font-style: normal;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    transition-duration: 0.01ms !important;
-    animation-duration: 0.01ms !important;
-  }
+// Ring around whatever you reach with the Tab key
+:focus-visible {
+  @include focus-ring;
+}
+
+// On green backgrounds the ring is white so it can be seen
+.on-green :focus-visible {
+  outline-color: $color-white;
 }

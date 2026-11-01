@@ -1,6 +1,7 @@
 // ==========================================================================
-// Margin Notes — main stylesheet
-// Architecture: 7-1 inspired (abstracts / base / layout / components / sections)
+// Margin Notes: main stylesheet
+// Folders, in the order they are loaded (general to specific):
+// abstracts (tokens, mixins) > base > layout > components > sections
 // ==========================================================================
 
 // Base
@@ -22,8 +23,8 @@
 
 // Page sections
 @use "sections/hero";
-@use "sections/arrivals";
-@use "sections/club";
-@use "sections/plans";
+@use "sections/new-arrivals";
+@use "sections/book-club";
+@use "sections/membership";
 @use "sections/events";
 @use "sections/visit";

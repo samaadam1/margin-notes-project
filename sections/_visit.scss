@@ -1,161 +1,148 @@
 @use "../abstracts" as *;
 
 .visit {
+  // Two cards in a flex row that wraps.
+  // Mobile: each card is full width, so the second wraps under the first.
+  // Desktop: each card is half the width (minus half the 24px gap), so they sit side by side.
   &__inner {
-    @include flex-col(sp(4));
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-16;
 
-    @include up(lg) {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: sp(5);
+    @include desktop-up {
+      gap: $space-24;
     }
   }
-}
 
-.panel {
-  @include flex-col(20px);
-  padding: sp(5);
-  border-radius: $radius-md;
+  &__card {
+    @include stack(20px);
+    width: 100%;
+    padding: $space-24;
+    border-radius: $radius-md;
 
-  @include up(lg) {
-    gap: sp(5);
-    padding: sp(7);
+    @include desktop-up {
+      width: calc(50% - 12px);
+      gap: $space-24;
+      padding: $space-48;
+    }
+
+    // Card 1: white
+    &--visit {
+      background: $color-white;
+      border: 1px solid $color-line;
+
+      address {
+        color: $color-muted;
+      }
+
+      .link {
+        align-self: flex-start;
+      }
+    }
+
+    // Card 2: green
+    &--newsletter {
+      background: $color-forest;
+      color: $color-white;
+
+      @include desktop-up {
+        justify-content: center;
+      }
+    }
   }
 
   &__title {
-    font-family: $font-serif;
-    font-weight: 400;
-    @include type(32, 36);
-
-    @include up(lg) {
-      @include type(40, 44);
-    }
+    @include text-panel-title;
   }
 
-  // Visit the shop
-  &--visit {
-    background: $white;
-    border: 1px solid $line;
-
-    address {
-      color: $muted;
-    }
-
-    .link {
-      align-self: flex-start;
-    }
-  }
-
-  // Newsletter
-  &--letter {
-    background: $forest;
-    color: $on-forest-heading;
-
-    @include up(lg) {
-      justify-content: center;
-    }
-  }
-
+  // Title + description of the newsletter
   &__intro {
-    @include flex-col(sp(2));
+    @include stack($space-8);
 
-    @include up(lg) {
-      gap: sp(3);
+    @include desktop-up {
+      gap: $space-12;
     }
 
     p {
-      color: $on-forest-body;
+      color: $color-on-forest;
     }
   }
 }
 
-// Opening hours
+// Opening hours: a real table
 .hours {
   width: 100%;
-  @include type(14, 20);
+  @include text-style(14px, 20px);
 
-  @include up(lg) {
-    @include type(15, 22);
+  @include desktop-up {
+    @include text-style(15px, 22px);
   }
 
   caption {
-    padding-bottom: sp(2);
-    color: $muted;
+    padding-bottom: $space-8;
+    color: $color-muted;
     text-align: left;
-    @include t-eyebrow;
+    @include text-small-heading;
   }
 
   tr {
-    border-top: 1px solid $line;
+    border-top: 1px solid $color-line;
 
     &:last-child {
-      border-bottom: 1px solid $line;
+      border-bottom: 1px solid $color-line;
     }
   }
 
   th,
   td {
-    padding: sp(3) 0;
+    padding: $space-12 0;
   }
 
   th {
-    padding-right: sp(2);
+    padding-right: $space-8;
     text-align: left;
     font-weight: 600;
   }
 
   td {
-    color: $muted;
+    color: $color-muted;
     text-align: right;
   }
 }
 
 // Newsletter form
-.letter-form {
-  @include flex-col(sp(2));
+.newsletter-form {
+  @include stack($space-8);
 
+  &__label {
+    @include text-style(14px, 20px, 600);
+  }
+
+  // Mobile: input, then button. Desktop: input and button in a row
   &__row {
-    @include flex-col(sp(2));
+    @include stack($space-8);
 
-    @include up(lg) {
+    @include desktop-up {
       flex-direction: row;
-      gap: sp(3);
+      align-items: flex-start;
+      gap: $space-12;
     }
 
-    .field__input {
-      @include up(lg) {
+    .field {
+      @include desktop-up {
         flex: 1;
       }
     }
 
     .btn {
-      width: 100%;
-      margin-top: sp(1);
-
-      @include up(lg) {
-        width: auto;
-        margin-top: 0;
-        padding: 0 sp(5);
+      @include desktop-up {
+        padding: 0 $space-24;
       }
     }
   }
 
   &__hint {
-    margin-top: sp(1);
-    color: $on-forest-body;
-    @include type(14, 20);
-
-    @include up(lg) {
-      margin-top: 0;
-    }
-  }
-
-  // The error colour (#B3261E) is too dark on Forest, so the message sits on a
-  // white chip to keep the required colour AND stay readable.
-  .field__error {
-    align-self: flex-start;
-    padding: 2px sp(2);
-    border-radius: $radius-sm;
-    background: $white;
+    color: $color-on-forest;
+    @include text-style(14px, 20px);
   }
 }

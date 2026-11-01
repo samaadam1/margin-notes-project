@@ -1,75 +1,77 @@
 @use "../abstracts" as *;
 
 .events {
-  background: $surface;
+  background: $color-surface;
 
+  // Mobile: intro, then list. Desktop: a flex row, intro left and list right
   &__inner {
-    @include flex-col(sp(6));
+    @include stack($space-32);
 
-    @include up(lg) {
-      display: grid;
-      grid-template-columns: repeat(12, minmax(0, 1fr));
-      gap: sp(5);
+    @include desktop-up {
+      flex-direction: row;
+      gap: $space-96;
     }
   }
 
   &__intro {
-    @include flex-col(sp(2));
+    @include stack($space-8);
 
-    @include up(lg) {
-      grid-column: span 4;
-      gap: sp(4);
+    @include desktop-up {
+      flex: 1;
+      gap: $space-16;
     }
   }
 
+  // The list is always a stack of events
   &__list {
-    border-top: 1px solid $ink;
+    border-top: 1px solid $color-ink;
 
-    @include up(lg) {
-      grid-column: 6 / span 7;
+    @include desktop-up {
+      flex: 2;
     }
   }
 }
 
+// One event. This is the one real 2D layout, so it is a grid with named areas.
+// Mobile (2 rows):  "date body"      Desktop (1 row):  "date body action"
+//                   "date action"
 .event {
   display: grid;
-  grid-template-columns: 56px minmax(0, 1fr);
+  grid-template-columns: 56px 1fr;
   grid-template-areas:
     "date body"
     "date action";
-  column-gap: sp(4);
+  column-gap: $space-16;
   row-gap: 6px;
   align-items: start;
   padding: 20px 0;
-  border-bottom: 1px solid $line;
+  border-bottom: 1px solid $color-line;
 
-  @include up(lg) {
-    grid-template-columns: 96px minmax(0, 1fr) auto;
+  @include desktop-up {
+    grid-template-columns: 96px 1fr auto;
     grid-template-areas: "date body action";
-    column-gap: sp(5);
+    column-gap: $space-24;
     align-items: center;
-    padding: sp(5) 0;
+    padding: $space-24 0;
   }
 
   &__date {
     grid-area: date;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    @include stack(0);
   }
 
   &__day {
     font-family: $font-serif;
-    @include type(40, 40);
+    @include text-style(40px, 40px);
 
-    @include up(lg) {
-      @include type(48, 48);
+    @include desktop-up {
+      @include text-style(48px, 48px);
     }
   }
 
   &__month {
-    color: $muted;
-    @include t-eyebrow;
+    color: $color-muted;
+    @include text-small-heading;
   }
 
   &__body {
@@ -77,22 +79,17 @@
   }
 
   &__title {
-    @include t-card-title-lg;
+    @include text-card-title-large;
   }
 
   &__meta {
     margin-top: 6px;
-    color: $muted;
-    @include t-small;
+    color: $color-muted;
+    @include text-small;
   }
 
   &__action {
     grid-area: action;
     justify-self: start;
-    margin-top: 6px;
-
-    @include up(lg) {
-      margin-top: 0;
-    }
   }
 }

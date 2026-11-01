@@ -1,4 +1,5 @@
-// SVG icon symbols. Injected into the page so <use href="#i-name"> works everywhere (including file://).
+// SVG icon symbols. This file adds them to the page once,
+// then any icon is used anywhere with: <svg class="icon"><use href="#i-arrow" /></svg>
 document.body.insertAdjacentHTML("afterbegin", `
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <symbol id="i-arrow" viewBox="0 0 24 24">

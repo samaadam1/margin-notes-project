@@ -1,131 +1,153 @@
 @use "../abstracts" as *;
 
 .hero {
-  padding: 48px 0 64px;
+  padding: $space-48 0 $space-64;
 
-  @include up(lg) {
-    padding: sp(9) 0;
+  @include desktop-up {
+    padding: $space-96 0;
   }
 
+  // Mobile: text on top, collage below. Desktop: a flex row, text left and collage right
   &__inner {
-    display: grid;
-    gap: 40px;
+    @include stack(40px);
 
-    @include up(lg) {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: sp(5);
+    @include desktop-up {
+      flex-direction: row;
       align-items: center;
+      gap: $space-24;
     }
   }
 
-  &__copy {
-    @include flex-col(sp(4));
+  // ---- Div 1: text -------------------------------------------------------
+  &__content {
+    @include stack($space-16);
 
-    @include up(lg) {
-      gap: sp(5);
-      padding-right: sp(6);
+    @include desktop-up {
+      flex: 1;
+      gap: $space-24;
+      padding-right: $space-32;
     }
   }
 
   &__title {
-    @include t-display;
-
-    // Scales from ~59px at 1024 to the designed 84px at 1440
-    @include up(lg) {
-      font-size: clamp(3.5rem, 5.834vw, 5.25rem);
-      line-height: 1.048;
-    }
+    @include text-display;
   }
 
-  &__lead {
-    color: $muted;
+  &__description {
+    color: $color-muted;
 
-    @include up(lg) {
+    @include desktop-up {
       max-width: 460px;
     }
   }
 
-  // ---- Image collage ----------------------------------------------------
-  // One box that scales as a unit. Every piece is sized and placed in % of the
-  // box (taken from the design frames), so the three images stay locked
-  // together at any width. Mobile frame: 327 x 360 · Desktop frame: 588 x 600.
+  // Mobile: button, then link, stacked. Desktop: side by side
+  &__buttons {
+    @include stack($space-8);
+    padding-top: $space-8;
+
+    @include desktop-up {
+      flex-direction: row;
+      align-items: center;
+      gap: 28px;
+    }
+
+    // Centered under the full-width button on mobile
+    .link {
+      justify-content: center;
+      min-height: 44px;
+
+      @include desktop-up {
+        justify-content: flex-start;
+        min-height: 0;
+      }
+    }
+  }
+
+  // ---- Div 2: image collage ----------------------------------------------
+  // The collage is "relative", so the three pieces inside it use "absolute"
+  // and are placed from the collage's own corners.
+  //
+  // To make it look the same at every width, the box keeps a fixed shape
+  // (aspect-ratio) and every piece is sized in % of the box, so they all
+  // grow and shrink together. The % values come from the design frames:
+  // mobile 327 x 360, desktop 588 x 600.
   &__collage {
     position: relative;
     width: 100%;
     max-width: 480px;
-    margin-inline: auto;
+    margin: 0 auto;
     aspect-ratio: 327 / 360;
-    container-type: inline-size; // lets the badge text scale with the box
+    // Lets the badge text scale with the box (see "cqw" below)
+    container-type: inline-size;
 
-    @include up(lg) {
-      max-width: 588px;
-      margin-inline: 0 0;
-      justify-self: end;
+    @include desktop-up {
+      flex: 1;
+      max-width: none;
+      margin: 0;
       aspect-ratio: 588 / 600;
     }
   }
 
-  &__photo,
-  &__thumb,
-  &__badge {
-    position: absolute;
-  }
-
+  // Big photo: top right (260 x 320 on mobile, 460 x 540 on desktop)
   &__photo {
+    position: absolute;
     top: 0;
     right: 0;
-    width: 79.5%; // 260 / 327
-    height: 88.9%; // 320 / 360
+    width: 79.5%;
+    height: 88.9%;
     border-radius: $radius-md;
 
-    @include up(lg) {
-      width: 78.2%; // 460 / 588
-      height: 90%; // 540 / 600
+    @include desktop-up {
+      width: 78.2%;
+      height: 90%;
     }
   }
 
+  // Small photo: bottom left, with a page-colored border so it looks cut out
+  // (150 x 190 on mobile, 260 x 320 on desktop)
   &__thumb {
-    left: 0;
+    position: absolute;
     bottom: 0;
-    width: 45.9%; // 150 / 327
-    height: 52.8%; // 190 / 360
-    border: 6px solid $page;
+    left: 0;
+    width: 45.9%;
+    height: 52.8%;
+    border: 6px solid $color-page;
     border-radius: 20px;
-    font-size: rem(12);
 
-    @include up(lg) {
-      width: 44.2%; // 260 / 588
-      height: 53.3%; // 320 / 600
+    @include desktop-up {
+      width: 44.2%;
+      height: 53.3%;
       border-width: 8px;
       border-radius: 22px;
-      font-size: rem(14);
     }
   }
 
-  // "Book of the month" sticker
+  // Round yellow sticker: top left, tilted
+  // Size and place in %, and the text size in cqw (1cqw = 1% of the collage width)
   &__badge {
-    top: 5.6%; // 20 / 360
-    left: 2.4%; // 8 / 327
+    position: absolute;
+    top: 5.6%;
+    left: 2.4%;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 29.4%; // 96 / 327
+    width: 29.4%;
     aspect-ratio: 1;
     border-radius: 50%;
-    background: $mustard;
-    color: $ink;
+    background: $color-mustard;
+    color: $color-ink;
     text-align: center;
     transform: rotate(-12deg);
     font-family: $font-serif;
-    font-size: 4.9cqw; // 16px at the 327px frame
-    line-height: 1.12;
+    font-size: 4.9cqw;
+    line-height: 1.1;
 
-    @include up(lg) {
-      top: 8%; // 48 / 600
-      left: 10.9%; // 64 / 588
-      width: 23.1%; // 136 / 588
-      font-size: 3.74cqw; // 22px at the 588px frame
-      line-height: 1.09;
+    @include desktop-up {
+      top: 8%;
+      left: 10.9%;
+      width: 23.1%;
+      font-size: 3.74cqw;
     }
   }
 }

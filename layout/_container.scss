@@ -1,23 +1,18 @@
 @use "../abstracts" as *;
 
+// Centers the content. 1200px wide on desktop, 24px on each side on mobile.
 .container {
-  width: min(100% - #{$gutter-mobile * 2}, #{$content-width});
-  margin-inline: auto;
+  width: 100%;
+  max-width: $content-width + $gutter * 2;
+  margin: 0 auto;
+  padding: 0 $gutter;
 }
 
+// Space above and below each page section
 .section {
-  padding-block: sp(8);
+  padding: $space-64 0;
 
-  @include up(lg) {
-    padding-block: sp(10);
-  }
-}
-
-// Section header used by Arrivals / Plans / Events
-.section-head {
-  @include flex-col(sp(2));
-
-  @include up(lg) {
-    gap: sp(3);
+  @include desktop-up {
+    padding: $space-112 0;
   }
 }

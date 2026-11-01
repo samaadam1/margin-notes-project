@@ -1,0 +1,165 @@
+@use "../abstracts" as *;
+
+.membership {
+  &__inner {
+    @include stack(40px);
+
+    @include desktop-up {
+      gap: 56px;
+    }
+  }
+
+  // Div 1: the three headings, centered
+  &__head {
+    @include stack($space-8);
+    text-align: center;
+
+    @include desktop-up {
+      gap: $space-12;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+  }
+
+  // Div 2: the cards. Mobile: a stack. Desktop: a flex row
+  &__list {
+    @include stack($space-24);
+
+    // On tablets the stacked cards stay a readable width
+    width: 100%;
+    max-width: 560px;
+    margin: 0 auto;
+
+    @include desktop-up {
+      flex-direction: row;
+      max-width: none;
+    }
+  }
+
+  &__item {
+    display: flex;
+
+    @include desktop-up {
+      flex: 1;
+    }
+  }
+
+  // Mobile: the featured plan comes first. Desktop: back to its place in the middle
+  &__item--featured {
+    order: -1;
+
+    @include desktop-up {
+      order: 0;
+    }
+  }
+}
+
+// One plan card: a column with a top part and a bottom part
+.plan {
+  position: relative;
+  flex: 1;
+  @include stack($space-16);
+  padding: 28px $space-24 $space-24;
+  border: 1px solid $color-line;
+  border-radius: $radius-md;
+  background: $color-white;
+
+  @include desktop-up {
+    gap: 20px;
+    padding: $space-32;
+  }
+
+  // The highlighted middle card: green border and a "Most popular" badge on its top edge
+  &--featured {
+    border: 2px solid $color-forest;
+  }
+
+  // The badge hangs half outside the card, so it needs the space the sections gap gives it
+  &__badge {
+    position: absolute;
+    top: -14px;
+    left: $space-24;
+    display: inline-flex;
+    align-items: center;
+    height: 28px;
+    padding: 0 $space-12;
+    border-radius: $radius-pill;
+    background: $color-mustard;
+    @include text-small-heading;
+
+    @include desktop-up {
+      left: $space-32;
+    }
+  }
+
+  // Top part: name, price, description
+  &__top {
+    @include stack($space-16);
+
+    @include desktop-up {
+      gap: 20px;
+    }
+  }
+
+  &__name {
+    @include text-card-title-small;
+  }
+
+  &__price {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0 6px;
+  }
+
+  &__amount {
+    font-family: $font-serif;
+    white-space: nowrap;
+    @include text-style(44px, 44px);
+
+    @include desktop-up {
+      @include text-style(56px, 56px);
+    }
+  }
+
+  &__period {
+    color: $color-muted;
+    @include text-style(14px, 20px);
+  }
+
+  &__desc {
+    color: $color-muted;
+  }
+
+  // Bottom part: features and the button. margin-top: auto pushes it to the bottom,
+  // so the three buttons line up even when the descriptions differ in length.
+  &__bottom {
+    @include stack($space-16);
+    margin-top: auto;
+
+    @include desktop-up {
+      gap: 20px;
+    }
+  }
+
+  &__features {
+    @include stack($space-12);
+    padding-top: $space-16;
+    border-top: 1px solid $color-line;
+    @include text-style(15px, 22px);
+
+    @include desktop-up {
+      padding-top: 20px;
+    }
+
+    li {
+      display: flex;
+      gap: 10px;
+    }
+
+    .icon {
+      margin-top: 1px;
+      color: $color-forest;
+    }
+  }
+}
