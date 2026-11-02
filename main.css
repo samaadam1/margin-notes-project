@@ -1295,7 +1295,8 @@ address {
   display: grid;
   grid-template-columns: 56px 1fr;
   grid-template-areas: "date body" "date action";
-  column-gap: 16px;
+  -moz-column-gap: 16px;
+       column-gap: 16px;
   row-gap: 6px;
   align-items: start;
   padding: 20px 0;
@@ -1305,7 +1306,8 @@ address {
   .event {
     grid-template-columns: 96px 1fr auto;
     grid-template-areas: "date body action";
-    column-gap: 24px;
+    -moz-column-gap: 24px;
+         column-gap: 24px;
     align-items: center;
     padding: 24px 0;
   }
@@ -1509,4 +1511,4 @@ address {
   color: #c9d8cf;
   font-size: 14px;
   line-height: 20px;
-}
+}/*# sourceMappingURL=main.css.map */
